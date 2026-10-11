@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>遇見心動 - 在線實時暢聊</title>
+    <title>遇見心動 - 實時多人在線暢聊</title>
     <style>
         :root {
             --primary-color: #ff4b7d;
@@ -42,14 +42,60 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            height: 92vh;
-            max-height: 800px;
+            height: 95vh;
+            max-height: 850px;
+        }
+
+        /* 聊天室多角色切換區域 */
+        .rooms-bar {
+            display: flex;
+            gap: 12px;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .rooms-bar::-webkit-scrollbar {
+            display: none; /* 隱藏滾動條，保持美觀 */
+        }
+
+        .room-tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.3s;
+            opacity: 0.6;
+        }
+
+        .room-tab.active {
+            background: rgba(255, 75, 125, 0.15);
+            border-color: var(--primary-color);
+            opacity: 1;
+        }
+
+        .room-tab-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .room-tab-name {
+            font-size: 0.85rem;
+            font-weight: bold;
         }
 
         /* 頭部狀態欄 */
         .chat-header {
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.03);
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.02);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             align-items: center;
@@ -88,22 +134,21 @@
         }
 
         .user-info h2 {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             margin-bottom: 4px;
             font-weight: 600;
         }
 
         .user-info p {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #4cd964;
             font-weight: 500;
         }
 
-        /* 提示小標籤 */
         .header-tag {
             position: absolute;
             right: 20px;
-            top: 25px;
+            top: 22px;
             background: rgba(255, 75, 125, 0.15);
             color: var(--primary-color);
             padding: 4px 10px;
@@ -179,27 +224,27 @@
 
         /* 核心引流按鈕區域 */
         .action-area {
-            padding: 20px;
+            padding: 15px 20px;
             background: rgba(0, 0, 0, 0.2);
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .action-title {
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #aaa;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .btn-sns {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             border-radius: 50px;
             border: none;
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: bold;
             display: flex;
             align-items: center;
@@ -225,9 +270,9 @@
         }
 
         .sns-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 10px;
+            width: 22px;
+            height: 22px;
+            margin-right: 8px;
         }
 
         /* 底部真正的在線客服輸入框 */
@@ -265,13 +310,8 @@
             user-select: none;
         }
 
-        /* 强行深度隐藏原生穿帮悬浮图标 */
-        iframe#ss-chat, 
-        .ss-chat-widget, 
-        [id^="salesmartly-"], 
-        .ss-widget-button,
-        div[class*="salesmartly"],
-        iframe[src*="salesmartly"] {
+        /* 强行深度隐藏 SaleSmartly 默认圆圈悬浮球图标 */
+        iframe#ss-chat, .ss-chat-widget, [id^="salesmartly-"], .ss-widget-button, div[class*="salesmartly"], iframe[src*="salesmartly"] {
             display: none !important;
             visibility: hidden !important;
             opacity: 0 !important;
@@ -283,38 +323,21 @@
 <body>
 
     <div class="chat-container">
-        <!-- 頭部導航 -->
+        <!-- 頂部多個聊天室切換菜單 -->
+        <div class="rooms-bar" id="roomsBar">
+            <div class="room-tab active" onclick="switchRoom(0)">
+                <img src="https://unsplash.com" class="room-tab-avatar">
+                <span class="room-tab-name">Mimi (甜美)</span>
+            </div>
+            <div class="room-tab" onclick="switchRoom(1)">
+                <img src="https://unsplash.com" class="room-tab-avatar">
+                <span class="room-tab-name">Jessica (火辣)</span>
+            </div>
+            <div class="room-tab" onclick="switchRoom(2)">
+                <img src="https://unsplash.com" class="room-tab-avatar">
+                <span class="room-tab-name">Sophia (御姐)</span>
+            </div>
+        </div>
+
+        <!-- 聊天主頭部 -->
         <div class="chat-header">
-            <div class="avatar-container">
-                <img src="https://unsplash.com" alt="Avatar" class="avatar">
-                <div class="status-dot"></div>
-            </div>
-            <div class="user-info">
-                <h2>Mimi (미미) ❤️ 24歲</h2>
-                <p>🟢 在線等你聊天中...</p>
-            </div>
-            <div class="header-tag">🔥 距離 1.2km</div>
-        </div>
-
-        <!-- 聊天內容區 -->
-        <div class="chat-messages" id="chatBox"></div>
-
-        <!-- 強引流轉跳按鈕區域 -->
-        <div class="action-area">
-            <div class="action-title">✨ 點擊下方按鈕，立刻和她私密暢聊 👇</div>
-            
-            <!-- LINE 轉跳按鈕 -->
-            <a href="https://line.me" target="_blank" class="btn-sns btn-line">
-                <svg class="sns-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 10.3c0-4.6-4.7-8.3-10.5-8.3C4.7 2 0 5.7 0 10.3c0 4.1 3.7 7.6 8.8 8.2.3 0 .8.3.9.7.1.3.1.7 0 1.1l-.4 2.4c-.1.5.2.2.4 0l2.7-2.5c.2-.2.4-.3.7-.3 3.6 0 10.9-2.5 10.9-9.6zm-14.8 2.1H7.7c-.3 0-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5s.5.2.5.5v3.5h1.1c.3 0 .5.2.5.5s-.2.5-.6.5zm2.7-.5c0 .3-.2.5-.5.5s-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5s.5.2.5.5v4zm3.9 0c0 .3-.2.5-.5.5h-1.9c-.3 0-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5s.5.2.5.5v3.5h1.4c.3 0 .5.2.5.5zm3.1-1.5c.3 0 .5.2.5.5s-.2.5-.5.5h-1.4v1h1.4c.3 0 .5.2.5.5s-.2.5-.5.5h-1.9c-.3 0-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5h1.9c-.3 0 .5.2.5.5s-.2.5-.5.5h-1.4v1h1.4z"/></svg>
-                添加我的 LINE 賬號
-            </a>
-
-            <!-- KakaoTalk 轉跳按鈕 -->
-            <a href="https://kakao.com" target="_blank" class="btn-sns btn-kakao">
-                <svg class="sns-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-5.52 0-10 3.478-10 7.77 0 2.76 1.83 5.185 4.58 6.56-.19.69-.69 2.51-.79 2.9.13.01.27 0 .39-.08.97-.65 4.53-3.1 5.17-3.53.22.03.43.04.65.04 5.52 0 10-3.478 10-7.77S17.52 3 12 3z"/></svg>
-                添加我的 KakaoTalk
-            </a>
-        </div>
-
-        <!-- 視覺+真實客服輸入框 -->
-        <div class="fake-input-bar">
