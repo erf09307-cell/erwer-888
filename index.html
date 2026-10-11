@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0a0204">
+  <meta name="theme-color" content="#030712">
   <title>MENHANCE | 프리미엄 프라이빗 힐링 케어</title>
   
-  <!-- Tailwind CSS CDN 快速加载样式库 -->
+  <!-- Tailwind CSS 快速加载样式库 -->
   <script src="https://tailwindcss.com"></script>
 
   <!-- ==================== [集成] LINE 和 KakaoTalk 手机端一键唤起脚本 ==================== -->
@@ -26,131 +26,131 @@
 
   <style>
     :root {
-      --bg-dark: #0a0103; /* 极深奢华红黑背景 */
-      --bg-gradient-end: #22030a; /* 渐变深红尾部 */
-      --panel-card: rgba(38, 8, 17, 0.9); /* 加深高保真毛玻璃卡片 */
-      --cyan: #55eaff; /* 荧光极光青 */
+      --cyber-black: #030712; /* 纯黑底色，确保高反差 */
+      --neon-red: #ff0055;    /* 魅惑霓虹红 */
+      --neon-cyan: #00f5ff;   /* 极光荧光青 */
     }
 
     body {
-      background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-gradient-end) 100%);
+      background-color: var(--cyber-black);
       font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", sans-serif;
       -webkit-tap-highlight-color: transparent;
       overflow-x: hidden;
     }
 
-    /* ⚡ 霓虹流光特效：无限循环呼吸微放大，带极强激光红发光，让按钮在手机全屏下极度吸睛 ⚡ */
-    .btn-fire-glow {
-      animation: pulseFireGlow 1.8s infinite ease-in-out;
+    /* ⚡ 极光引流特效：无限循环高频微膨胀，带强力绿色激光外发光，让按钮在全屏手机下极度吸睛 ⚡ */
+    .btn-laser-glow {
+      animation: pulseLaserGlow 1.8s infinite ease-in-out;
     }
 
-    @keyframes pulseFireGlow {
+    @keyframes pulseLaserGlow {
       0%, 100% {
         transform: scale(1);
-        box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+        box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
       }
       50% {
         transform: scale(1.04); /* 微微放大4%锁定焦点 */
-        box-shadow: 0 0 35px rgba(239, 68, 68, 0.95); /* 红色流光发光范围翻倍 */
+        box-shadow: 0 0 35px rgba(16, 185, 129, 0.95); /* 绿色流光发光范围翻倍 */
       }
     }
 
-    /* 极高反差发光毛玻璃卡片样式 */
-    .glow-red-card {
-      background: var(--panel-card);
+    /* 奢华私人俱乐部质感：带双色霓虹背光的毛玻璃卡片 */
+    .cyber-neon-card {
+      background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(239, 68, 68, 0.4); /* 强化红色发光边框线 */
+      border: 1px solid rgba(255, 0, 85, 0.3);
+      box-shadow: 0 0 25px rgba(255, 0, 85, 0.15), inset 0 0 15px rgba(0, 245, 255, 0.05);
     }
   </style>
 </head>
 <body class="text-white antialiased min-h-screen flex flex-col justify-between">
 
-  <!-- 顶部状态栏（高级红黑高反差发光设计） -->
-  <header class="w-full top-0 left-0 z-50 sticky bg-[#0a0103]/95 backdrop-blur-md border-b border-red-500/30">
+  <!-- 顶部状态栏（极光青高反差发光设计，字迹绝不模糊） -->
+  <header class="w-full top-0 left-0 z-50 sticky bg-[#030712]/95 backdrop-blur-md border-b border-cyan-500/20">
     <div class="mx-auto px-4 max-w-md h-16 flex items-center justify-between">
-      <div class="text-xl font-black tracking-widest text-white">MEN<span class="text-red-500">HANCE</span></div>
-      <div class="flex items-center space-x-2 bg-red-500/20 px-2.5 py-1 rounded-full border border-red-500/40">
+      <div class="text-xl font-black tracking-widest text-white">MEN<span class="text-[#00f5ff] drop-shadow-[0_0_8px_#00f5ff]">HANCE</span></div>
+      <div class="flex items-center space-x-2 bg-red-500/10 px-2.5 py-1 rounded-full border border-red-500/30">
         <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
         <span class="text-[11px] font-black text-red-400 tracking-wider">REALTIME LIVE</span>
       </div>
     </div>
   </header>
 
-  <!-- 主体引流核心区（专门针对大屏幕手机适配，全亮色字体，绝不费眼） -->
+  <!-- 主体引流核心区（专为手机全面屏设计，全高亮白色/荧光色字体，字字清晰） -->
   <main class="w-full flex-1 max-w-md mx-auto px-4 py-6 space-y-6">
 
-    <!-- 1. 顶部震撼标语：极光青、流光红与纯白的极致高对比，字字清晰夺目 -->
+    <!-- 1. 顶部震撼标语：采用极限白色和霓虹粉、青色撞色，冲击力极强 -->
     <div class="text-center space-y-3 py-2">
-      <span class="inline-block px-3 py-1 text-[11px] font-black text-[#55eaff] border border-[#55eaff]/60 rounded-full tracking-wider bg-[#55eaff]/15 uppercase animate-pulse">
+      <span class="inline-block px-3 py-1 text-[11px] font-black text-[#00f5ff] border border-[#00f5ff]/50 rounded-full tracking-wider bg-[#00f5ff]/10 uppercase animate-pulse shadow-[0_0_8px_rgba(0,245,255,0.2)]">
         Premium Secret Aura
       </span>
       <h1 class="text-3xl font-black tracking-tight text-white leading-tight">
-        지친 일상을 깨우는<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-[#55eaff] drop-shadow-[0_2px_15px_rgba(239,68,68,0.5)]">최상급 시크릿 힐링 케어</span>
+        지친 일상을 깨우는<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-purple-400 to-[#00f5ff] drop-shadow-[0_2px_15px_rgba(255,0,85,0.4)]">최상급 시크릿 힐링 케어</span>
       </h1>
-      <!-- 🌟 文字已全面加粗并调至最高亮白 -->
-      <p class="text-sm font-black text-white max-w-xs mx-auto leading-relaxed">
+      <!-- 🌟 文字已全部加粗、亮白处理 -->
+      <p class="text-sm font-black text-slate-100 max-w-xs mx-auto leading-relaxed">
         민감한 스트레스와 피로를 완벽하게 날려버릴 1:1 맞춤형 전담 관리를 가장 안전하고 프라이빗한 공간에서 만나보세요.
       </p>
     </div>
 
-    <!-- 2. 🔥 核心引流动作区：高饱颜色撞色双通道按钮，点灯效果极其强烈 🔥 -->
-    <div class="w-full glow-red-card rounded-2xl p-5 space-y-4 shadow-[0_0_25px_rgba(239,68,68,0.25)]">
-      <p class="text-center text-xs font-black text-amber-300 tracking-wide bg-amber-500/20 py-2 rounded-lg border border-amber-500/40">
+    <!-- 2. 🔥 核心引流动作区：红蓝霓虹背光卡片 + 高饱和撞色双按钮，点击率极高 🔥 -->
+    <div class="w-full cyber-neon-card rounded-2xl p-5 space-y-4">
+      <p class="text-center text-xs font-black text-amber-300 tracking-wide bg-amber-500/10 py-2 rounded-lg border border-amber-500/40">
         💬 기다림 없는 실시간 1:1 익명 비밀 매칭
       </p>
       
       <div class="flex flex-col space-y-3">
-        <!-- LINE 专属直连大按钮（酷炫高亮红绿反差 + 无限高频红色霓虹呼吸发光特效） -->
-        <button onclick="openLineChat()" class="btn-fire-glow w-full h-14 rounded-xl font-black text-white bg-gradient-to-r from-red-600 via-red-500 to-red-600 flex items-center justify-center space-x-3 text-base tracking-wide active:scale-95 transition-all">
+        <!-- LINE 专属直连大按钮（高点击翡翠绿渐变 + 无限高频激光呼吸发光特效） -->
+        <button onclick="openLineChat()" class="btn-laser-glow w-full h-14 rounded-xl font-black text-white bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 flex items-center justify-center space-x-3 text-base tracking-wide active:scale-95 transition-all">
           <span class="text-xl">🟢</span>
           <span>익명 비밀상담 (LINE 추가) ↗</span>
         </button>
 
-        <!-- KakaoTalk 专属直连大按钮（经典高亮 Kakao 官方黄 + 黑色加粗字体） -->
+        <!-- KakaoTalk 专属直连大按钮（经典高亮 Kakao 官方黄 + 黑色加粗字体反差） -->
         <button onclick="openKakaoChat()" class="w-full h-14 rounded-xl font-black text-[#191919] bg-[#FEE500] hover:bg-[#E6CE00] flex items-center justify-center space-x-3 text-base tracking-wide active:scale-95 transition-all shadow-lg shadow-yellow-500/30 border border-yellow-400/40">
           <span class="text-xl">💛</span>
           <span>1:1 비공개 상담 (카카오톡) ↗</span>
         </button>
       </div>
 
-      <!-- 保障小字全部升级为大反差高亮高白，让用户一目了然、极度放心 -->
+      <!-- 保障标识全部采用高对比颜色，给客户绝对的信任感 -->
       <div class="flex items-center justify-center space-x-4 text-xs font-black pt-1">
         <span class="flex items-center text-emerald-400">🔒 100% 비밀보장</span>
-        <span class="text-slate-400">|</span>
-        <span class="flex items-center text-[#55eaff]">👤 개인정보 즉시파기</span>
+        <span class="text-slate-500">|</span>
+        <span class="flex items-center text-[#00f5ff]">👤 개인정보 즉시파기</span>
       </div>
     </div>
 
-    <!-- 3. 📸 美女/高端SPA画廊展示区（加入红色荧光边框环绕，完美吸睛） -->
+    <!-- 3. 📸 美女/高端SPA画廊展示区（加入精美发光粉色细边框，诱惑力满分） -->
     <div class="space-y-3">
       <div class="flex items-center justify-between px-1">
         <h2 class="text-sm font-black tracking-wide text-white flex items-center">
-          <span class="w-2 h-3.5 bg-red-500 rounded-full mr-2 shadow-[0_0_10px_#ef4444]"></span>
+          <span class="w-2 h-3.5 bg-red-500 rounded-full mr-2 shadow-[0_0_10px_#ff0055]"></span>
           PREMIUM GALLERY
         </h2>
         <span class="text-xs font-black text-red-400">※ 실제 관리 공간 및 시안</span>
       </div>
 
-      <!-- 图片流排列（您可以直接在 src 属性内替换为您的美女模特或高端会所的照片链接） -->
+      <!-- 图片流列表（您可以在以下 <img> 的 src 属性中直接替换为您准备好的美女模特或高级店面照片链接） -->
       <div class="grid grid-cols-1 gap-3">
         <!-- 主大图卡片 -->
-        <div class="relative group rounded-xl overflow-hidden border border-red-500/40 shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+        <div class="relative group rounded-xl overflow-hidden border border-red-500/40 shadow-[0_0_15px_rgba(255,0,85,0.25)]">
           <img src="https://unsplash.com" alt="Spa Room" class="w-full h-56 object-cover">
-          <div class="absolute bottom-0 left-0 w-full p-3 bg-gradient-to-t from-black via-black/90 to-transparent text-xs text-white font-black">
+          <div class="absolute bottom-0 left-0 w-full p-3 bg-gradient-to-t from-black via-black/95 to-transparent text-xs text-white font-black">
             럭셔리 프라이빗 VIP 룸 (Luxury VIP Private Room)
           </div>
         </div>
 
-        <!-- 下方双并排图卡片（已加上亮色边框和高对比文字） -->
+        <!-- 下方双并排图卡片（已加上极光青发光框和高反差文字） -->
         <div class="grid grid-cols-2 gap-3">
-          <div class="relative group rounded-xl overflow-hidden border border-red-500/30 shadow-[0_0_10px_rgba(239,68,68,0.15)]">
+          <div class="relative group rounded-xl overflow-hidden border border-cyan-500/30 shadow-[0_0_10px_rgba(0,245,255,0.15)]">
             <img src="https://unsplash.com" alt="Therapy" class="w-full h-36 object-cover">
             <div class="absolute bottom-0 left-0 w-full p-2 bg-gradient-to-t from-black via-black/95 to-transparent text-[11px] text-white font-black">
               최상급 맞춤 아로마 테라피
             </div>
           </div>
-          <div class="relative group rounded-xl overflow-hidden border border-red-500/30 shadow-[0_0_10px_rgba(239,68,68,0.15)]">
+          <div class="relative group rounded-xl overflow-hidden border border-cyan-500/30 shadow-[0_0_10px_rgba(0,245,255,0.15)]">
             <img src="https://unsplash.com" alt="Model" class="w-full h-36 object-cover">
             <div class="absolute bottom-0 left-0 w-full p-2 bg-gradient-to-t from-black via-black/95 to-transparent text-[11px] text-white font-black">
               전담 매니저 매칭 서비스
@@ -160,15 +160,15 @@
       </div>
     </div>
 
-    <!-- 4. 服务保障区块（大字高清晰版） -->
+    <!-- 4. 服务保障区块（文字全面亮白，完美看清） -->
     <div class="grid grid-cols-2 gap-3">
-      <div class="glow-red-card p-4 rounded-xl space-y-1 border border-red-500/20">
+      <div class="cyber-neon-card p-4 rounded-xl space-y-1">
         <div class="text-sm font-black text-amber-300">⭐ 5.0 만족도</div>
         <h3 class="text-xs font-black text-white">이용자 대만족</h3>
         <p class="text-[11px] font-black text-white leading-normal">철저한 매니저 교육과 최상의 마인드로 방문객 만족도 극대화.</p>
       </div>
-      <div class="glow-red-card p-4 rounded-xl space-y-1 border border-red-500/20">
-        <div class="text-sm font-black text-[#55eaff]">⏱️ 24H LIVE</div>
+      <div class="cyber-neon-card p-4 rounded-xl space-y-1">
+        <div class="text-sm font-black text-[#00f5ff]">⏱️ 24H LIVE</div>
         <h3 class="text-xs font-black text-white">실시간 예약 확인</h3>
         <p class="text-[11px] font-black text-white leading-normal">터치 한 번으로 대기 없이 즉시 오픈 채팅 및 채널로 즉시 연결.</p>
       </div>
@@ -176,12 +176,12 @@
 
   </main>
 
-  <!-- 底部灰色合规声明（加白加粗显眼设计） -->
-  <footer class="w-full border-t border-slate-900 bg-[#030001] py-6 mt-10">
+  <!-- 底部合规声明（加白加粗显眼设计，保障页面安全） -->
+  <footer class="w-full border-t border-slate-900 bg-[#010204] py-6 mt-10">
     <div class="max-w-md mx-auto px-4 text-center text-[10px] text-slate-300 space-y-2 font-black">
       <p class="text-white font-black">상호명: MENHANCE VIP CONSULTING | 공식 고객센터 지원 채널</p>
       <p class="leading-relaxed">의학적 면책 고지: 본 플랫폼에서 소개하는 마사지 및 테라피 프로그램은 신체 피로 회복과 심신 안정을 목적으로 하며, 일체의 불법 행위를 조장하거나 의료 대체 행위를 제공하지 않습니다.</p>
-      <p class="text-slate-500">© 2026 MENHANCE. All Rights Reserved.</p>
+      <p class="text-slate-600">© 2026 MENHANCE. All Rights Reserved.</p>
     </div>
   </footer>
 
