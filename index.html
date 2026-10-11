@@ -3,107 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VIP老饕俱樂部 - 限時特惠發放中</title>
+    <title>GLOBAL GOURMET STANDARD</title>
     <!-- 引入 Tailwind CSS -->
     <script src="https://jsdelivr.net"></script>
     <style>
-        /* 雷射光暈按鈕動畫 */
-        @keyframes laser-glow {
-            0%, 100% { box-shadow: 0 0 15px 2px rgba(6, 199, 85, 0.6), 0 0 30px 4px rgba(6, 199, 85, 0.3); transform: scale(1); }
-            50% { box-shadow: 0 0 25px 8px rgba(6, 199, 85, 0.9), 0 0 50px 15px rgba(6, 199, 85, 0.5); transform: scale(1.02); }
+        /* 1:1 還原圖一頂部的超大圓弧裁剪效果 */
+        .phone-top-curve {
+            border-bottom-left-radius: 50% 15%;
+            border-bottom-right-radius: 50% 15%;
         }
-        .animate-laser {
-            animation: laser-glow 2s infinite ease-in-out;
+        /* LINE按鈕呼吸雷射光暈 */
+        @keyframes pulse-line {
+            0%, 100% { box-shadow: 0 0 15px 2px rgba(6, 199, 85, 0.6); transform: scale(1); }
+            50% { box-shadow: 0 0 25px 8px rgba(6, 199, 85, 0.8); transform: scale(1.02); }
         }
-        /* 背景漸層模糊，確保文字清晰 */
-        .glass-overlay {
-            background: linear-gradient(to bottom, rgba(7, 15, 38, 0.7) 0%, rgba(7, 15, 38, 0.95) 80%, #070F26 100%);
+        .animate-line {
+            animation: pulse-line 2s infinite ease-in-out;
         }
     </style>
 </head>
-<body class="bg-[#070F26] font-sans antialiased text-gray-200 select-none min-h-screen">
+<!-- 純淨白色背景，用來強烈對比出中央的黑色手機框架 -->
+<body class="bg-gray-100 font-sans antialiased select-none min-h-screen flex justify-center items-center">
 
-    <!-- 頂部全螢幕視覺背景區 (可放影片或滿版大圖) -->
-    <div class="relative w-full h-[45vh] sm:h-[50vh] overflow-hidden bg-black">
-        <!-- 💡 建議：您可以將此處的 src 換成您烹飪美食的短影音網址 (.mp4)，或者極度誘人的招牌菜照片網址 -->
-        <img src="https://unsplash.com" 
-             alt="主廚私房菜" class="w-full h-full object-cover opacity-80">
-             
-        <!-- 漸層遮罩：讓上方圖片完美融入下方的暗黑網頁 -->
-        <div class="absolute inset-0 glass-overlay"></div>
+    <!-- 模擬手機外殼容器 (完全鎖定手機比例，完美適配 FB 內建瀏覽器) -->
+    <div class="w-full max-w-md bg-[#070F26] min-h-screen shadow-2xl flex flex-col justify-between relative overflow-hidden">
         
-        <!-- 懸浮限時標籤 -->
-        <div class="absolute top-6 left-6 bg-red-600 text-white text-xs font-black px-4 py-2 rounded-full tracking-widest shadow-2xl animate-bounce">
-            ⏰ 今日限定 VIP 福利
-        </div>
+        <!-- =================【圖一核心：頂部大圓弧裁剪區】================= -->
+        <!-- 外層用白色區塊往下壓出圓弧，完美重現圖一的黑白交界線 -->
+        <div class="absolute top-0 left-0 w-full h-32 bg-white phone-top-curve z-50 pointer-events-none"></div>
+
+        <!-- 頂部導航列 (保留圖二的高級商標，並向下平移躲開圓弧) -->
+        <header class="w-full px-6 pt-24 pb-4 flex justify-between items-center border-b border-gray-800/30 z-10">
+            <!-- 左側商標：亮黃色強調 -->
+            <div class="text-xs font-extrabold tracking-wider text-amber-400">
+                GOURMET HUB <span class="text-white">CONSULTING</span>
+            </div>
+            <!-- 右側極小選單 -->
+            <div class="flex gap-3 text-[10px] text-gray-500">
+                <span>關於我們</span>
+                <span>隱私方針</span>
+            </div>
+        </header>
+
+        <!-- =================【圖二核心：高質感暗黑吸粉內容】================= -->
+        <main class="flex-grow flex flex-col justify-center px-6 py-8 space-y-6 z-10">
+            
+            <!-- 1. 金色膠囊小標籤 (1:1 還原圖二頂部) -->
+            <div class="inline-block self-start bg-amber-400/10 border border-amber-400/30 rounded-full px-3 py-1">
+                <span class="text-[10px] font-bold tracking-widest text-amber-400 uppercase">
+                    ★ GLOBAL GOURMET STANDARD ★
+                </span>
+            </div>
+
+            <!-- 2. 核心大標題 (純白大字 + 亮黃色重點) -->
+            <h1 class="text-3xl font-black text-white tracking-tight leading-tight">
+                全台唯一的<br>
+                心理學老饕級 私廚料理 與<br>
+                <span class="text-amber-400">LINE 獨家隱藏版 預訂中心</span>
+            </h1>
+
+            <!-- 3. 副標題說明文字 (高質感灰色小字) -->
+            <p class="text-xs sm:text-sm text-gray-400 font-light leading-relaxed max-w-sm">
+                一個人很難解決的聚餐難題，我們用科學烹調技術與私密通道為您精準呈現。
+                現在加入最安全的私密官方 LINE 頻道，105% 保證享有優先訂位權與限量的專屬老饕福利。
+            </p>
+
+            <!-- 4. 急迫感提示區 -->
+            <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-3 flex items-center justify-between">
+                <div class="flex items-center gap-2 text-xs text-red-400 font-bold">
+                    <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                    <span>今日免費私房菜名額剩餘：</span>
+                </div>
+                <span class="text-white font-black text-sm bg-red-600 px-2 py-0.5 rounded" id="count-num">14 位</span>
+            </div>
+
+            <!-- 5. 行動呼籲雙按鈕 (1:1 還原圖二排列方式與顏色) -->
+            <div class="flex flex-col gap-3 pt-2">
+                
+                <!-- 按鈕 A：LINE 官方綠色按鈕 (加入動態光暈) -->
+                <!-- 💡 請將 href 換成您的 LINE 連結 -->
+                <a href="https://line.me" 
+                   target="_blank"
+                   class="animate-line w-full bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-sm py-4 rounded-xl transition-all duration-300 transform active:scale-98 flex items-center justify-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                    <span>Official LINE 諮詢中心</span>
+                </a>
+
+                <!-- 按鈕 B：圖二的經典亮黃色按鈕 -->
+                <!-- 💡 可以設定為第二個吸粉連結 -->
+                <a href="https://line.me" 
+                   target="_blank"
+                   class="w-full bg-[#FEE500] hover:bg-[#f3db00] text-[#191919] font-bold text-sm py-4 rounded-xl transition-all duration-300 transform active:scale-98 flex items-center justify-center gap-2">
+                    <span>領取 今日限量老饕招待券</span>
+                </a>
+
+            </div>
+
+        </main>
+
+        <!-- 6. 底部免責與版權 (1:1 還原圖二上方選單右側字體質感) -->
+        <footer class="w-full text-center py-6 border-t border-gray-900 bg-[#050B1A] z-10">
+            <p class="text-[9px] text-gray-650 tracking-wider">
+                © 2026 GOURMET HUB. 本活動由私廚團隊獨立舉辦，個資受安全隱私條例保護。
+            </p>
+        </footer>
+
     </div>
 
-    <!-- 主內容區：向上微調重疊，營造層次感 -->
-    <main class="max-w-xl mx-auto px-6 -mt-20 relative z-10 text-center space-y-6 pb-16">
-        
-        <!-- 金色尊榮盾牌標籤 -->
-        <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/40 rounded-full px-5 py-1.5 backdrop-blur-md">
-            <span class="text-amber-400 text-xs font-bold tracking-widest">👑 PREMIUM GOURMET CLUB</span>
-        </div>
-
-        <!-- 核心催眠標題 -->
-        <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight pt-2">
-            進群秒領 <span class="text-amber-400 underline decoration-amber-400 decoration-wavy underline-offset-8">免費私房菜</span><br>
-            解鎖老饕才知道的隱藏菜單！
-        </h1>
-
-        <!-- 限時倒數計時器（強力製造迫切感，吸粉神器） -->
-        <div class="bg-gray-900/60 border border-gray-850 rounded-2xl p-4 backdrop-blur-md shadow-2xl flex flex-col items-center gap-2">
-            <div class="text-xs text-gray-400 font-medium">—— 本波免費名額即將額滿 ——</div>
-            <!-- 假動態倒數（顯示名額剩餘） -->
-            <div class="flex items-center gap-2 text-red-500 font-extrabold text-lg">
-                <span class="inline-block w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
-                <span>今日僅剩：<span class="text-2xl text-white bg-red-650 px-2 py-0.5 rounded" id="count-number">13</span> 位名額</span>
-            </div>
-        </div>
-
-        <!-- 介紹文案 -->
-        <p class="text-sm sm:text-base text-gray-400 font-light leading-relaxed max-w-md mx-auto text-center">
-            不用排隊、不用碰運氣！加入我們私密官方 LINE，不僅能第一時間預訂「當日限定限量料理」，完成加入立刻在 LINE 自動發送<b>【免費招待券】</b>！
-        </p>
-
-        <!-- 行動呼籲：震撼級雷射光暈 LINE 按鈕 -->
-        <!-- 💡 請將 href 換成您的 LINE 連結 -->
-        <div class="pt-4">
-            <a href="https://line.me" 
-               target="_blank"
-               class="animate-laser block w-full bg-[#06C755] hover:bg-[#05b34c] text-white font-black text-xl py-5 rounded-2xl transition-all duration-300 transform active:scale-95 flex items-center justify-center gap-3">
-                <!-- LINE 簡約白標誌 -->
-                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                    <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.604.391.084.922.258 1.057.592.12.301.079.771.038 1.077l-.164 1.031c-.049.303-.24 1.187 1.031.647 1.271-.54 6.844-4.029 9.328-6.9a8.91 8.91 0 0 0 2.674-6.183z"/>
-                </svg>
-                <span>立即加 LINE 領取免費私房菜</span>
-            </a>
-        </div>
-
-        <!-- 安全承諾 -->
-        <p class="text-[11px] text-gray-500 flex items-center justify-center gap-1">
-            🔒 已有 3,841 位美食同好加入 | 點擊將直接喚醒手機 LINE 程式
-        </p>
-
-    </main>
-
-    <!-- 簡單腳部 -->
-    <footer class="w-full text-center py-6 bg-[#040A1A] border-t border-gray-950">
-        <p class="text-[10px] text-gray-600">
-            © 2026 VIP GOURMET. 店家保留活動變更及最終解釋之權利。
-        </p>
-    </footer>
-
-    <!-- 讓名額看起來在倒數的超心機小腳本 -->
+    <!-- 讓名額產生倒數急迫感的腳本 -->
     <script>
         setInterval(() => {
-            const numEl = document.getElementById('count-number');
-            let current = parseInt(numEl.innerText);
-            if (current > 3 && Math.random() > 0.7) {
-                numEl.innerText = current - 1;
+            const el = document.getElementById('count-num');
+            let current = parseInt(el.innerText);
+            if (current > 3 && Math.random() > 0.6) {
+                el.innerText = (current - 1) + " 位";
             }
-        }, 8000);
+        }, 7000);
     </script>
 
 </body>
