@@ -3,123 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GLOBAL GOURMET STANDARD</title>
+    <title>心靈與身體的深夜避風港</title>
     <!-- 引入 Tailwind CSS -->
     <script src="https://jsdelivr.net"></script>
     <style>
-        /* 1:1 還原圖一頂部的超大圓弧裁剪效果 */
+        /* 療癒系微發光呼吸動畫，降低防備心，提高點擊率 */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 15px 2px rgba(168, 85, 247, 0.4); transform: scale(1); }
+            50% { box-shadow: 0 0 25px 8px rgba(168, 85, 247, 0.7); transform: scale(1.02); }
+        }
+        .animate-glow {
+            animation: pulse-glow 2.5s infinite ease-in-out;
+        }
+        /* 還原頂部手機大圓弧裁剪效果 */
         .phone-top-curve {
             border-bottom-left-radius: 50% 15%;
             border-bottom-right-radius: 50% 15%;
         }
-        /* LINE按鈕呼吸雷射光暈 */
-        @keyframes pulse-line {
-            0%, 100% { box-shadow: 0 0 15px 2px rgba(6, 199, 85, 0.6); transform: scale(1); }
-            50% { box-shadow: 0 0 25px 8px rgba(6, 199, 85, 0.8); transform: scale(1.02); }
-        }
-        .animate-line {
-            animation: pulse-line 2s infinite ease-in-out;
-        }
     </style>
 </head>
-<!-- 純淨白色背景，用來強烈對比出中央的黑色手機框架 -->
+<!-- 使用深夜療癒、具隱私感的深紫黑色底色 -->
 <body class="bg-gray-100 font-sans antialiased select-none min-h-screen flex justify-center items-center">
 
-    <!-- 模擬手機外殼容器 (完全鎖定手機比例，完美適配 FB 內建瀏覽器) -->
-    <div class="w-full max-w-md bg-[#070F26] min-h-screen shadow-2xl flex flex-col justify-between relative overflow-hidden">
+    <!-- 手機端外殼容器 -->
+    <div class="w-full max-w-md bg-[#0F0C1B] min-h-screen shadow-2xl flex flex-col justify-between relative overflow-hidden">
         
-        <!-- =================【圖一核心：頂部大圓弧裁剪區】================= -->
-        <!-- 外層用白色區塊往下壓出圓弧，完美重現圖一的黑白交界線 -->
+        <!-- 頂部大圓弧裁剪區（還原手機外框格式） -->
         <div class="absolute top-0 left-0 w-full h-32 bg-white phone-top-curve z-50 pointer-events-none"></div>
 
-        <!-- 頂部導航列 (保留圖二的高級商標，並向下平移躲開圓弧) -->
-        <header class="w-full px-6 pt-24 pb-4 flex justify-between items-center border-b border-gray-800/30 z-10">
-            <!-- 左側商標：亮黃色強調 -->
-            <div class="text-xs font-extrabold tracking-wider text-amber-400">
-                GOURMET HUB <span class="text-white">CONSULTING</span>
+        <!-- 頂部極簡商標列 -->
+        <header class="w-full px-6 pt-24 pb-4 flex justify-between items-center border-b border-purple-950/30 z-10">
+            <div class="text-xs font-extrabold tracking-wider text-purple-400">
+                SOUL & BODY <span class="text-white">HEALING</span>
             </div>
-            <!-- 右側極小選單 -->
             <div class="flex gap-3 text-[10px] text-gray-500">
-                <span>關於我們</span>
-                <span>隱私方針</span>
+                <span>100% 隱私保護</span>
             </div>
         </header>
 
-        <!-- =================【圖二核心：高質感暗黑吸粉內容】================= -->
+        <!-- 核心行銷吸粉內容 -->
         <main class="flex-grow flex flex-col justify-center px-6 py-8 space-y-6 z-10">
             
-            <!-- 1. 金色膠囊小標籤 (1:1 還原圖二頂部) -->
-            <div class="inline-block self-start bg-amber-400/10 border border-amber-400/30 rounded-full px-3 py-1">
-                <span class="text-[10px] font-bold tracking-widest text-amber-400 uppercase">
-                    ★ GLOBAL GOURMET STANDARD ★
+            <!-- 1. 紫色尊榮小標籤 -->
+            <div class="inline-block bg-purple-500/10 border border-purple-500/30 rounded-full px-3 py-1 self-start">
+                <span class="text-[10px] font-bold tracking-widest text-purple-300 uppercase">
+                    ★ PRIVATE RELAXATION STANDARD ★
                 </span>
             </div>
 
-            <!-- 2. 核心大標題 (純白大字 + 亮黃色重點) -->
+            <!-- 2. 核心大標題（純白大字 + 療癒粉紫重點） -->
             <h1 class="text-3xl font-black text-white tracking-tight leading-tight">
-                全台唯一的<br>
-                心理學老饕級 私廚料理 與<br>
-                <span class="text-amber-400">LINE 獨家隱藏版 預訂中心</span>
+                釋放緊繃的身體。<br>
+                聽你說，懂你的<br>
+                <span class="text-purple-400">一對一私密 預約諮詢中心</span>
             </h1>
 
-            <!-- 3. 副標題說明文字 (高質感灰色小字) -->
+            <!-- 3. 心靈雞湯與痛點說明文字 -->
             <p class="text-xs sm:text-sm text-gray-400 font-light leading-relaxed max-w-sm">
-                一個人很難解決的聚餐難題，我們用科學烹調技術與私密通道為您精準呈現。
-                現在加入最安全的私密官方 LINE 頻道，105% 保證享有優先訂位權與限量的專屬老饕福利。
+                生活累了吧？那些無法對熟人說的壓力和疲憊，交給我們來溫柔承接。
+                專業的手法舒緩僵硬肉體，耐心的陪伴療癒孤獨心靈。
+                點擊下方即刻開啟專屬 LINE 安全通道，100% 隱私保密，讓緊繃的自己好好放個假。
             </p>
 
-            <!-- 4. 急迫感提示區 -->
-            <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-3 flex items-center justify-between">
-                <div class="flex items-center gap-2 text-xs text-red-400 font-bold">
-                    <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-                    <span>今日免費私房菜名額剩餘：</span>
+            <!-- 4. 即時在線狀態（吸粉關鍵：製造「有人在等你」的即時感） -->
+            <div class="bg-purple-950/40 border border-purple-500/20 rounded-xl p-3 flex items-center justify-between">
+                <div class="flex items-center gap-2 text-xs text-purple-300 font-bold">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                    <span>目前療癒師團隊在線狀態：</span>
                 </div>
-                <span class="text-white font-black text-sm bg-red-600 px-2 py-0.5 rounded" id="count-num">14 位</span>
+                <span class="text-white font-black text-xs bg-purple-600/80 px-2 py-0.5 rounded">可立即一對一聊天</span>
             </div>
 
-            <!-- 5. 行動呼籲雙按鈕 (1:1 還原圖二排列方式與顏色) -->
+            <!-- 5. 雙行動呼籲按鈕（上綠下紫排列，滿足不同需求） -->
             <div class="flex flex-col gap-3 pt-2">
                 
-                <!-- 按鈕 A：LINE 官方綠色按鈕 (加入動態光暈) -->
+                <!-- 按鈕 A：直達 LINE 官方客服（主按鈕） -->
                 <!-- 💡 請將 href 換成您的 LINE 連結 -->
                 <a href="https://line.me" 
                    target="_blank"
-                   class="animate-line w-full bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-sm py-4 rounded-xl transition-all duration-300 transform active:scale-98 flex items-center justify-center gap-2">
-                    <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
-                    <span>Official LINE 諮詢中心</span>
+                   class="w-full bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-sm py-4 rounded-xl transition-all duration-300 transform active:scale-98 flex items-center justify-center gap-2 shadow-lg shadow-[#06C755]/20">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.604.391.084.922.258 1.057.592.12.301.079.771.038 1.077l-.164 1.031c-.049.303-.24 1.187 1.031.647 1.271-.54 6.844-4.029 9.328-6.9a8.91 8.91 0 0 0 2.674-6.183z"/>
+                    </svg>
+                    <span>加 LINE 預約 | 專屬感官按摩</span>
                 </a>
 
-                <!-- 按鈕 B：圖二的經典亮黃色按鈕 -->
-                <!-- 💡 可以設定為第二個吸粉連結 -->
+                <!-- 按鈕 B：深夜限定傾聽聊天按鈕（神祕紫色發光） -->
+                <!-- 💡 也可以設定連到同一個 LINE，但文案不同能吸引不同動機的客人 -->
                 <a href="https://line.me" 
                    target="_blank"
-                   class="w-full bg-[#FEE500] hover:bg-[#f3db00] text-[#191919] font-bold text-sm py-4 rounded-xl transition-all duration-300 transform active:scale-98 flex items-center justify-center gap-2">
-                    <span>領取 今日限量老饕招待券</span>
+                   class="animate-glow w-full bg-purple-600 hover:bg-purple-700 text-white font-bold text-sm py-4 rounded-xl transition-all duration-300 transform active:scale-98 flex items-center justify-center gap-2">
+                    <span>💬 點我直接開始 線上一對一傾聽聊天</span>
                 </a>
 
             </div>
 
         </main>
 
-        <!-- 6. 底部免責與版權 (1:1 還原圖二上方選單右側字體質感) -->
-        <footer class="w-full text-center py-6 border-t border-gray-900 bg-[#050B1A] z-10">
+        <!-- 6. 底部隱私聲明 -->
+        <footer class="w-full text-center py-6 border-t border-purple-950/40 bg-[#0A0712]">
             <p class="text-[9px] text-gray-650 tracking-wider">
-                © 2026 GOURMET HUB. 本活動由私廚團隊獨立舉辦，個資受安全隱私條例保護。
+                © 2026 HEALING HUB. 本通道採用進階安全加密，嚴格保障雙方隱私對話。
             </p>
         </footer>
 
     </div>
-
-    <!-- 讓名額產生倒數急迫感的腳本 -->
-    <script>
-        setInterval(() => {
-            const el = document.getElementById('count-num');
-            let current = parseInt(el.innerText);
-            if (current > 3 && Math.random() > 0.6) {
-                el.innerText = (current - 1) + " 位";
-            }
-        }, 7000);
-    </script>
 
 </body>
 </html>
