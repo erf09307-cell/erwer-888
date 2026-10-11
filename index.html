@@ -58,7 +58,7 @@
         }
         
         .rooms-bar::-webkit-scrollbar {
-            display: none; /* 隱藏滾動條，保持美觀 */
+            display: none;
         }
 
         .room-tab {
@@ -310,7 +310,7 @@
             user-select: none;
         }
 
-        /* 强行深度隐藏 SaleSmartly 默认圆圈悬浮球图标 */
+        /* 强行隐藏 SaleSmartly 原生穿帮弹框 */
         iframe#ss-chat, .ss-chat-widget, [id^="salesmartly-"], .ss-widget-button, div[class*="salesmartly"], iframe[src*="salesmartly"] {
             display: none !important;
             visibility: hidden !important;
@@ -327,17 +327,20 @@
         <div class="rooms-bar" id="roomsBar">
             <div class="room-tab active" onclick="switchRoom(0)">
                 <img src="https://unsplash.com" class="room-tab-avatar">
-                <span class="room-tab-name">Mimi (甜美)</span>
+                <span class="room-tab-name">Mimi (分流客服A)</span>
             </div>
             <div class="room-tab" onclick="switchRoom(1)">
                 <img src="https://unsplash.com" class="room-tab-avatar">
-                <span class="room-tab-name">Jessica (火辣)</span>
-            </div>
-            <div class="room-tab" onclick="switchRoom(2)">
-                <img src="https://unsplash.com" class="room-tab-avatar">
-                <span class="room-tab-name">Sophia (御姐)</span>
+                <span class="room-tab-name">Jessica (分流客服B)</span>
             </div>
         </div>
 
         <!-- 聊天主頭部 -->
         <div class="chat-header">
+            <div class="avatar-container">
+                <img src="" alt="Avatar" class="avatar" id="mainAvatar">
+                <div class="status-dot"></div>
+            </div>
+            <div class="user-info">
+                <h2 id="mainTitle"></h2>
+                <p>🟢 在線等你聊天中...</p>
