@@ -145,6 +145,13 @@
             transform: translateY(10px);
         }
 
+        .message.outgoing {
+            background: var(--primary-color);
+            color: #ffffff;
+            align-self: flex-end;
+            border-top-right-radius: 4px;
+        }
+
         .message.typing-indicator {
             background: rgba(255, 255, 255, 0.04);
             padding: 12px 20px;
@@ -223,7 +230,7 @@
             margin-right: 10px;
         }
 
-        /* 底部真正的在線客服觸發欄 */
+        /* 底部输入框拦截触发栏（一碰就弹出SaleSmartly原生聊天窗） */
         .fake-input-bar {
             display: flex;
             padding: 12px 20px;
@@ -259,7 +266,7 @@
             user-select: none;
         }
 
-        /* 仅在初始化时静默隐藏右下角默认原生聊天球，防止遮挡。只要粉丝点输入框，官方原生大弹窗就会瞬间正常弹出 */
+        /* 静默隐藏右下角的原生圆形图标，保持网页美观度，当男粉点输入框时官方大弹窗会瞬间正常出现 */
         .ss-widget-button, [id^="salesmartly-"].ss-widget-button {
             opacity: 0 !important;
             pointer-events: none !important;
@@ -285,7 +292,7 @@
         <!-- 聊天消息流區域 -->
         <div class="chat-messages" id="chatBox"></div>
 
-        <!-- LINE 和 KakaoTalk 核心按鈕 -->
+        <!-- LINE 和 KakaoTalk 核心按鈕区域 -->
         <div class="action-area">
             <div class="action-title">✨ 아래 버튼을 눌러 미미와 비밀 대화를 시작하세요 👇</div>
             
@@ -302,10 +309,4 @@
             </a>
         </div>
 
-        <!-- 底部真实客服触发条：任何点击或输入动作都会瞬间唤醒第二张截图里的原生聊天大窗口 -->
         <div class="fake-input-bar">
-            <input type="text" class="real-input" id="userMsgInput" placeholder="여기 누르고 미미와 대화하기... (点击这里开始畅聊)" readonly>
-            <div class="fake-send" id="sendBtn">전송</div>
-        </div>
-    </div>
-
