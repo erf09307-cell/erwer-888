@@ -29,8 +29,6 @@
             align-items: center;
             color: #ffffff;
             padding: 10px;
-            /* 预留出底部空间，防止 SaleSmartly 插件的悬浮球遮挡核心引流按钮 */
-            padding-bottom: 80px; 
         }
 
         /* 網頁核心容器 */
@@ -147,6 +145,13 @@
             transform: translateY(10px);
         }
 
+        .message.outgoing {
+            background: var(--primary-color);
+            color: #ffffff;
+            align-self: flex-end;
+            border-top-right-radius: 4px;
+        }
+
         .message.typing-indicator {
             background: rgba(255, 255, 255, 0.05);
             padding: 12px 20px;
@@ -225,23 +230,30 @@
             margin-right: 10px;
         }
 
-        /* 底部視覺輔助輸入框 */
+        /* 底部真正的在線客服輸入框 */
         .fake-input-bar {
             display: flex;
             padding: 12px 20px;
             background: rgba(255, 255, 255, 0.02);
             align-items: center;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 10;
         }
 
-        .fake-input {
+        .real-input {
             flex: 1;
             background: rgba(255, 255, 255, 0.05);
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 10px 16px;
             border-radius: 20px;
             color: #fff;
             font-size: 0.9rem;
+            outline: none;
+        }
+        
+        .real-input::placeholder {
+            color: #777;
         }
 
         .fake-send {
@@ -250,6 +262,13 @@
             font-weight: bold;
             font-size: 0.95rem;
             cursor: pointer;
+            user-select: none;
+        }
+
+        /* 强行隐藏 SaleSmartly 默认圆圈悬浮球气泡，防止视觉穿帮 */
+        #ss-chat, .ss-chat-widget, [id^="salesmartly-"], .ss-widget-button {
+            display: none !important;
+            visibility: hidden !important;
         }
     </style>
 </head>
@@ -276,36 +295,25 @@
         <div class="action-area">
             <div class="action-title">✨ 點擊下方按鈕，立刻和她私密暢聊 👇</div>
             
-            <!-- LINE 轉跳按鈕 - 请替换为您的加友链接 -->
+            <!-- LINE 轉跳按鈕 -->
             <a href="https://line.me" target="_blank" class="btn-sns btn-line">
                 <svg class="sns-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 10.3c0-4.6-4.7-8.3-10.5-8.3C4.7 2 0 5.7 0 10.3c0 4.1 3.7 7.6 8.8 8.2.3 0 .8.3.9.7.1.3.1.7 0 1.1l-.4 2.4c-.1.5.2.2.4 0l2.7-2.5c.2-.2.4-.3.7-.3 3.6 0 10.9-2.5 10.9-9.6zm-14.8 2.1H7.7c-.3 0-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5s.5.2.5.5v3.5h1.1c.3 0 .5.2.5.5s-.2.5-.6.5zm2.7-.5c0 .3-.2.5-.5.5s-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5s.5.2.5.5v4zm3.9 0c0 .3-.2.5-.5.5h-1.9c-.3 0-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5s.5.2.5.5v3.5h1.4c.3 0 .5.2.5.5zm3.1-1.5c.3 0 .5.2.5.5s-.2.5-.5.5h-1.4v1h1.4c.3 0 .5.2.5.5s-.2.5-.5.5h-1.9c-.3 0-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5h1.9c-.3 0 .5.2.5.5s-.2.5-.5.5h-1.4v1h1.4z"/></svg>
                 添加我的 LINE 賬號
             </a>
 
-            <!-- KakaoTalk 轉跳按鈕 - 请替换为您的加友链接 -->
+            <!-- KakaoTalk 轉跳按鈕 -->
             <a href="https://kakao.com" target="_blank" class="btn-sns btn-kakao">
                 <svg class="sns-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-5.52 0-10 3.478-10 7.77 0 2.76 1.83 5.185 4.58 6.56-.19.69-.69 2.51-.79 2.9.13.01.27 0 .39-.08.97-.65 4.53-3.1 5.17-3.53.22.03.43.04.65.04 5.52 0 10-3.478 10-7.77S17.52 3 12 3z"/></svg>
                 添加我的 KakaoTalk
             </a>
         </div>
 
-        <!-- 視覺輔助輸入框 -->
+        <!-- 視覺+真實客服輸入框 -->
         <div class="fake-input-bar">
-            <div class="fake-input">點擊上方按鈕直接添加...</div>
-            <div class="fake-send">發送</div>
+            <input type="text" class="real-input" id="userMsgInput" placeholder="想對她說點什麼嗎？輸入並發送...">
+            <div class="fake-send" id="sendBtn">發送</div>
         </div>
     </div>
 
     <!-- 模擬打字及消息彈窗的交互邏輯 -->
     <script>
-        const chatBox = document.getElementById('chatBox');
-        
-        const scripts = [
-            { text: "👋 嗨！你也是從 Facebook 看到我的嗎？😊", delay: 800 },
-            { text: "剛剛下班一個人好無聊，正在想找誰聊聊天呢... 剛好你就點進來了，這算不算緣分呀？✨", delay: 1800 },
-            { text: "這裡訊息回得比較慢，而且網頁容易掉線... 🥺", delay: 1800 },
-            { text: "👇 你方便加我的 <b>LINE</b> 或者是 <b>KakaoTalk</b> 嗎？我都一直在線，加完記得主動敲我一下，發個貼圖我就知道是你啦～等你哦！❤️", delay: 2000 }
-        ];
-
-        function showTypingIndicator() {
-            const indicator = document.createElement('div');
