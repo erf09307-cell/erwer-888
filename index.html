@@ -1,113 +1,189 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
+<!doctype html>
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>心靈與身體的深夜避風港</title>
-    <!-- 引入 Tailwind CSS -->
-    <script src="https://jsdelivr.net"></script>
-    <style>
-        /* 療癒系微發光呼吸動畫，降低防備心，提高點擊率 */
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 15px 2px rgba(168, 85, 247, 0.4); transform: scale(1); }
-            50% { box-shadow: 0 0 25px 8px rgba(168, 85, 247, 0.7); transform: scale(1.02); }
-        }
-        .animate-glow {
-            animation: pulse-glow 2.5s infinite ease-in-out;
-        }
-        /* 還原頂部手機大圓弧裁剪效果 */
-        .phone-top-curve {
-            border-bottom-left-radius: 50% 15%;
-            border-bottom-right-radius: 50% 15%;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#061225">
+  <title>MENHANCE | 프리미엄 프라이빗 힐링 케어</title>
+  
+  <!-- Tailwind CSS CDN 快速加载样式库 -->
+  <script src="https://tailwindcss.com"></script>
+
+  <!-- ==================== [集成] LINE 和 KakaoTalk 手机端一键唤起脚本 ==================== -->
+  <script>
+    // 手机端一键拉起 LINE
+    function openLineChat() {
+        // 🚨 请在此处将 YOUR_LINE_ID 替换为您真正的 LINE 官方号链接或好友添加ID
+        var lineUrl = "https://line.me"; 
+        window.open(lineUrl, '_blank');
+    }
+
+    // 手机端一键拉起 KakaoTalk
+    function openKakaoChat() {
+        // 🚨 请在此处将 YOUR_KAKAO_LINK 替换为您真正的 KakaoTalk 开放聊天室(Open Chat)链接
+        var kakaoUrl = "https://kakao.com"; 
+        window.open(kakaoUrl, '_blank');
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg: #040a14;
+      --panel: #0a1424;
+      --cyan: #55eaff;
+      --line: rgba(85,234,255,0.15);
+      --kakao: #FEE500; /* 纯正韩国 KakaoTalk 官方黄色 */
+      --line-yellow: #FFE600; /* 高亮金黄色 */
+    }
+
+    body {
+      background-color: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+
+    /* 韩国主流引流落地页专属：无限高频微晃动与呼吸组合动画，极大提高手机点击率 */
+    .btn-bounce-glow {
+      animation: bounceGlow 2s infinite ease-in-out;
+    }
+
+    @keyframes bounceGlow {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 20px rgba(255, 230, 0, 0.3);
+      }
+      50% {
+        transform: scale(1.04); /* 微微膨胀放大 */
+        box-shadow: 0 4px 35px rgba(255, 230, 0, 0.75); /* 金色光晕发光加倍 */
+      }
+    }
+
+    /* 精美平滑毛玻璃背景蒙版 */
+    .glass-card {
+      background: rgba(10, 20, 36, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(85, 234, 255, 0.1);
+    }
+  </style>
 </head>
-<!-- 使用深夜療癒、具隱私感的深紫黑色底色 -->
-<body class="bg-gray-100 font-sans antialiased select-none min-h-screen flex justify-center items-center">
+<body class="text-slate-100 antialiased min-h-screen flex flex-col justify-between">
 
-    <!-- 手機端外殼容器 -->
-    <div class="w-full max-w-md bg-[#0F0C1B] min-h-screen shadow-2xl flex flex-col justify-between relative overflow-hidden">
-        
-        <!-- 頂部大圓弧裁剪區（還原手機外框格式） -->
-        <div class="absolute top-0 left-0 w-full h-32 bg-white phone-top-curve z-50 pointer-events-none"></div>
-
-        <!-- 頂部極簡商標列 -->
-        <header class="w-full px-6 pt-24 pb-4 flex justify-between items-center border-b border-purple-950/30 z-10">
-            <div class="text-xs font-extrabold tracking-wider text-purple-400">
-                SOUL & BODY <span class="text-white">HEALING</span>
-            </div>
-            <div class="flex gap-3 text-[10px] text-gray-500">
-                <span>100% 隱私保護</span>
-            </div>
-        </header>
-
-        <!-- 核心行銷吸粉內容 -->
-        <main class="flex-grow flex flex-col justify-center px-6 py-8 space-y-6 z-10">
-            
-            <!-- 1. 紫色尊榮小標籤 -->
-            <div class="inline-block bg-purple-500/10 border border-purple-500/30 rounded-full px-3 py-1 self-start">
-                <span class="text-[10px] font-bold tracking-widest text-purple-300 uppercase">
-                    ★ PRIVATE RELAXATION STANDARD ★
-                </span>
-            </div>
-
-            <!-- 2. 核心大標題（純白大字 + 療癒粉紫重點） -->
-            <h1 class="text-3xl font-black text-white tracking-tight leading-tight">
-                釋放緊繃的身體。<br>
-                聽你說，懂你的<br>
-                <span class="text-purple-400">一對一私密 預約諮詢中心</span>
-            </h1>
-
-            <!-- 3. 心靈雞湯與痛點說明文字 -->
-            <p class="text-xs sm:text-sm text-gray-400 font-light leading-relaxed max-w-sm">
-                生活累了吧？那些無法對熟人說的壓力和疲憊，交給我們來溫柔承接。
-                專業的手法舒緩僵硬肉體，耐心的陪伴療癒孤獨心靈。
-                點擊下方即刻開啟專屬 LINE 安全通道，100% 隱私保密，讓緊繃的自己好好放個假。
-            </p>
-
-            <!-- 4. 即時在線狀態（吸粉關鍵：製造「有人在等你」的即時感） -->
-            <div class="bg-purple-950/40 border border-purple-500/20 rounded-xl p-3 flex items-center justify-between">
-                <div class="flex items-center gap-2 text-xs text-purple-300 font-bold">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                    <span>目前療癒師團隊在線狀態：</span>
-                </div>
-                <span class="text-white font-black text-xs bg-purple-600/80 px-2 py-0.5 rounded">可立即一對一聊天</span>
-            </div>
-
-            <!-- 5. 雙行動呼籲按鈕（上綠下紫排列，滿足不同需求） -->
-            <div class="flex flex-col gap-3 pt-2">
-                
-                <!-- 按鈕 A：直達 LINE 官方客服（主按鈕） -->
-                <!-- 💡 請將 href 換成您的 LINE 連結 -->
-                <a href="https://line.me" 
-                   target="_blank"
-                   class="w-full bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-sm py-4 rounded-xl transition-all duration-300 transform active:scale-98 flex items-center justify-center gap-2 shadow-lg shadow-[#06C755]/20">
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                        <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.604.391.084.922.258 1.057.592.12.301.079.771.038 1.077l-.164 1.031c-.049.303-.24 1.187 1.031.647 1.271-.54 6.844-4.029 9.328-6.9a8.91 8.91 0 0 0 2.674-6.183z"/>
-                    </svg>
-                    <span>加 LINE 預約 | 專屬感官按摩</span>
-                </a>
-
-                <!-- 按鈕 B：深夜限定傾聽聊天按鈕（神祕紫色發光） -->
-                <!-- 💡 也可以設定連到同一個 LINE，但文案不同能吸引不同動機的客人 -->
-                <a href="https://line.me" 
-                   target="_blank"
-                   class="animate-glow w-full bg-purple-600 hover:bg-purple-700 text-white font-bold text-sm py-4 rounded-xl transition-all duration-300 transform active:scale-98 flex items-center justify-center gap-2">
-                    <span>💬 點我直接開始 線上一對一傾聽聊天</span>
-                </a>
-
-            </div>
-
-        </main>
-
-        <!-- 6. 底部隱私聲明 -->
-        <footer class="w-full text-center py-6 border-t border-purple-950/40 bg-[#0A0712]">
-            <p class="text-[9px] text-gray-650 tracking-wider">
-                © 2026 HEALING HUB. 本通道採用進階安全加密，嚴格保障雙方隱私對話。
-            </p>
-        </footer>
-
+  <!-- 顶部科技感LOGO与固定状态条 -->
+  <header class="w-full top-0 left-0 z-50 sticky bg-[#040a14]/90 backdrop-blur-md border-b border-cyan-500/10">
+    <div class="mx-auto px-4 max-w-md h-16 flex items-center justify-between">
+      <div class="text-lg font-black tracking-widest text-white">MEN<span class="text-[#55eaff]">HANCE</span></div>
+      <div class="flex items-center space-x-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="text-xs font-bold text-emerald-400 tracking-wider">REALTIME LIVE</span>
+      </div>
     </div>
+  </header>
+
+  <!-- 主体引流核心区域（完全针对大屏智能手机优化） -->
+  <main class="w-full flex-1 max-w-md mx-auto px-4 py-6 space-y-6">
+
+    <!-- 1. 顶部标语与核心卖点：诱惑性极强的韩语话术 -->
+    <div class="text-center space-y-2 py-2">
+      <span class="inline-block px-3 py-1 text-[11px] font-extrabold text-[#55eaff] border border-[#55eaff]/30 rounded-full tracking-wider bg-[#55eaff]/5 uppercase">
+        Premium Secret Aura
+      </span>
+      <h1 class="text-3xl font-extrabold tracking-tight text-white leading-tight">
+        지친 일상을 깨우는<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-[#55eaff]">최상급 시크릿 힐링 케어</span>
+      </h1>
+      <p class="text-sm text-slate-400 max-w-xs mx-auto leading-relaxed">
+        민감한 스트레스와 피로를 완벽하게 날려버릴 1:1 맞춤형 전담 관리를 가장 안전하고 프라이빗한 공간에서 만나보세요.
+      </p>
+    </div>
+
+    <!-- 2. ⚡ 核心动作引流区：最显眼、最诱惑的 LINE & KAKAO 双高亮按钮 ⚡ -->
+    <div class="w-full glass-card rounded-2xl p-5 space-y-4 shadow-xl">
+      <p class="text-center text-xs font-bold text-amber-300 tracking-wide">
+        💬 기다림 없는 실시간 1:1 익명 비밀 매칭
+      </p>
+      
+      <div class="flex flex-col space-y-3">
+        <!-- LINE 专属直连大按钮（应用金黄色动态闪烁效果） -->
+        <button onclick="openLineChat()" class="btn-bounce-glow w-full h-14 rounded-xl font-black text-slate-900 bg-gradient-to-r from-amber-400 to-yellow-300 flex items-center justify-center space-x-3 text-base tracking-wide active:scale-95 transition-all">
+          <span class="text-xl">🟢</span>
+          <span>익명 비밀상담 (LINE 추가) ↗</span>
+        </button>
+
+        <!-- KakaoTalk 专属直连大按钮（采用韩国官方黄色及图标风格） -->
+        <button onclick="openKakaoChat()" class="w-full h-14 rounded-xl font-black text-[#191919] bg-[#FEE500] hover:bg-[#E6CE00] flex items-center justify-center space-x-3 text-base tracking-wide active:scale-95 transition-all shadow-lg shadow-yellow-500/5">
+          <span class="text-xl">💛</span>
+          <span>1:1 비공개 상담 (카카오톡) ↗</span>
+        </button>
+      </div>
+
+      <div class="flex items-center justify-center space-x-4 text-[11px] text-slate-400 pt-1">
+        <span class="flex items-center">🔒 100% 비밀보장</span>
+        <span class="text-slate-600">|</span>
+        <span class="flex items-center">👤 개인정보 즉시파기</span>
+      </div>
+    </div>
+
+    <!-- 3. 📸 核心图集展示区：留出位置给您替换顶级美女或环境大图 -->
+    <div class="space-y-3">
+      <div class="flex items-center justify-between px-1">
+        <h2 class="text-sm font-black tracking-wide text-white flex items-center">
+          <span class="w-1.5 h-3 bg-[#55eaff] rounded-full mr-2"></span>
+          PREMIUM GALLERY
+        </h2>
+        <span class="text-[11px] text-slate-500">※ 실제 관리 공간 및 시안</span>
+      </div>
+
+      <!-- 瀑布流大图排列（此处图片您可以直接在 src 属性内替换为您的美女模特或高档SPA环境图链接） -->
+      <div class="grid grid-cols-1 gap-3">
+        <div class="relative group rounded-xl overflow-hidden border border-slate-800">
+          <img src="https://unsplash.com" alt="Spa Room" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300">
+          <div class="absolute bottom-0 left-0 w-full p-3 bg-gradient-to-t from-black/80 to-transparent text-xs text-slate-300 font-semibold">
+            럭셔리 프라이빗 VIP 룸 (Luxury VIP Private Room)
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="relative group rounded-xl overflow-hidden border border-slate-800">
+            <img src="https://unsplash.com" alt="Therapy" class="w-full h-36 object-cover">
+            <div class="absolute bottom-0 left-0 w-full p-2 bg-gradient-to-t from-black/80 to-transparent text-[10px] text-slate-300">
+              최상급 맞춤형 아로마 테라피
+            </div>
+          </div>
+          <div class="relative group rounded-xl overflow-hidden border border-slate-800">
+            <img src="https://unsplash.com" alt="Model" class="w-full h-36 object-cover">
+            <div class="absolute bottom-0 left-0 w-full p-2 bg-gradient-to-t from-black/80 to-transparent text-[10px] text-slate-300">
+              전담 매니저 매칭 서비스
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. 保障服务卡片组 -->
+    <div class="grid grid-cols-2 gap-3">
+      <div class="glass-card p-4 rounded-xl space-y-1">
+        <div class="text-sm">⭐ 5.0</div>
+        <h3 class="text-xs font-bold text-white">이용자 대만족</h3>
+        <p class="text-[11px] text-slate-400">철저한 매니저 교육과 최상의 마인드로 방문객 만족도 극대화.</p>
+      </div>
+      <div class="glass-card p-4 rounded-xl space-y-1">
+        <div class="text-sm">⏱️ 24H</div>
+        <h3 class="text-xs font-bold text-white">실시간 예약 확인</h3>
+        <p class="text-[11px] text-slate-400">터치 한 번으로 대기 없이 즉시 오픈 채팅 및 채널로 즉시 연결.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- 网页底部免责高能防封说明（符合规范，保护页面） -->
+  <footer class="w-full border-t border-slate-900 bg-[#02060d] py-6 mt-10">
+    <div class="max-w-md mx-auto px-4 text-center text-[10px] text-slate-600 space-y-2">
+      <p>상호명: MENHANCE VIP CONSULTING | 공식 고객센터 지원 채널</p>
+      <p class="leading-relaxed">의학적 면책 고지: 본 플랫폼에서 소개하는 마사지 및 테라피 프로그램은 신체 피로 회복과 심신 안정을 목적으로 하며, 일체의 불법 행위를 조장하거나 의료 대체 행위를 제공하지 않습니다.</p>
+      <p>© 2026 MENHANCE. All Rights Reserved.</p>
+    </div>
+  </footer>
 
 </body>
 </html>
