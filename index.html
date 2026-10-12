@@ -3,337 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>실시간 비밀 채팅 - Talk with me</title>
+    <title>비밀 톡 - Secret Link 1:1</title>
+    <!-- 引入 Tailwind CSS 加速渲染 -->
+    <script src="https://tailwindcss.com"></script>
     <style>
+        @import url('https://jsdelivr.net');
+        
         :root {
-            --primary-color: #ff4b7d;
-            --line-color: #06C755;
-            --kakao-color: #FEE500;
-            --kakao-text: #191919;
-            --bg-gradient: linear-gradient(135deg, #161322 0%, #322b43 100%);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", Roboto, sans-serif;
+            --neon-pink: #ff2a74;
+            --neon-purple: #8a2be2;
+            --kakao-yellow: #FEE500;
+            --line-green: #06C755;
+            --dark-surface: rgba(24, 22, 37, 0.95);
         }
 
         body {
-            background: var(--bg-gradient);
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            background: radial-gradient(circle at top, #1f1a3a 0%, #0d0b18 100%);
             background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #ffffff;
-            padding: 10px;
+            overflow-x: hidden;
         }
 
-        /* 網頁核心主容器 */
-        .chat-container {
-            width: 100%;
-            max-width: 450px;
-            background: rgba(22, 20, 31, 0.95);
-            border-radius: 24px;
-            box-shadow: 0 20px 45px rgba(0,0,0,0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 94vh;
-            max-height: 820px;
-        }
-
-        /* 頂部頭部欄 */
-        .chat-header {
-            padding: 18px 20px;
-            background: rgba(255, 255, 255, 0.02);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-
-        .avatar-container {
-            position: relative;
-            margin-right: 15px;
-        }
-
-        .avatar {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            border: 2px solid var(--primary-color);
-            object-fit: cover;
-        }
-
-        .status-dot {
-            width: 14px;
-            height: 14px;
-            background-color: #4cd964;
-            border-radius: 50%;
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            border: 2px solid #16141f;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(76, 217, 100, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(76, 217, 100, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(76, 217, 100, 0); }
-        }
-
-        .user-info h2 {
-            font-size: 1.15rem;
-            margin-bottom: 4px;
-            font-weight: 600;
-            color: #ffffff;
-        }
-
-        .user-info p {
-            font-size: 0.85rem;
-            color: #4cd964;
-            font-weight: 500;
-        }
-
-        .header-tag {
-            position: absolute;
-            right: 20px;
-            top: 24px;
-            background: rgba(255, 75, 125, 0.2);
-            color: var(--primary-color);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-
-        /* 聊天消息區域 */
-        .chat-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .message {
-            max-width: 85%;
-            padding: 12px 16px;
-            border-radius: 16px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            position: relative;
-            animation: fadeIn 0.4s ease-out forwards;
-            opacity: 0;
-        }
-
-        @keyframes fadeIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .message.incoming {
-            background: rgba(255, 255, 255, 0.08);
-            color: #ffffff;
-            align-self: flex-start;
-            border-top-left-radius: 4px;
-            transform: translateY(10px);
-        }
-
-        .message.outgoing {
-            background: var(--primary-color);
-            color: #ffffff;
-            align-self: flex-end;
-            border-top-right-radius: 4px;
-        }
-
-        .message.typing-indicator {
-            background: rgba(255, 255, 255, 0.04);
-            padding: 12px 20px;
-            align-self: flex-start;
-            border-top-left-radius: 4px;
-        }
-
-        .dot-container {
-            display: flex;
-            align-items: center;
-            height: 14px;
-        }
-
-        .dot-flashing {
-            position: relative;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: #aaa;
-            animation: dotFlashing 1s infinite linear;
-            display: inline-block;
-            margin: 0 4px;
-        }
-        .dot-flashing:nth-child(2) { animation-delay: 0.2s; }
-        .dot-flashing:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes dotFlashing {
-            0%, 100% { background-color: rgba(255,255,255,0.2); }
-            50% { background-color: rgba(255,255,255,0.8); }
-        }
-
-        /* 核心引流按鈕區域 */
-        .action-area {
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.25);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .action-title {
-            text-align: center;
-            font-size: 0.85rem;
-            color: #b0afb8;
-            margin-bottom: 4px;
-        }
-
-        .btn-sns {
-            width: 100%;
-            padding: 14px;
-            border-radius: 50px;
-            border: none;
-            font-size: 1.05rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .btn-sns:active {
-            transform: scale(0.98);
-        }
-
-        .btn-line {
-            background-color: var(--line-color);
-            color: white;
-        }
-
-        .btn-kakao {
-            background-color: var(--kakao-color);
-            color: var(--kakao-text);
-        }
-
-        /* 底部输入框拦截触发栏 */
-        .fake-input-bar {
-            display: flex;
-            padding: 12px 20px;
-            background: rgba(255, 255, 255, 0.01);
-            align-items: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-            z-index: 10;
-        }
-
-        .real-input {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px 16px;
-            border-radius: 20px;
-            color: #fff;
-            font-size: 0.95rem;
-            outline: none;
-            cursor: pointer;
-        }
-        
-        .real-input::placeholder {
-            color: #666;
-        }
-
-        .fake-send {
-            color: var(--primary-color);
-            margin-left: 15px;
-            font-weight: bold;
-            font-size: 0.95rem;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        /* 隐藏右下角 Tawk.to 的原生小圆形图标，保持落地页美观 */
+        /* 隐藏原生 Tawk.to 组件，防止穿帮 */
         iframe[title="화상 채팅 전화를 수락함"], 
         .tawk-min-container,
         #tawk-chatpanel,
         iframe[id^="tawk-"] {
             opacity: 0 !important;
             pointer-events: none !important;
-            transition: opacity 0.2s ease-in-out;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.1, 1, 0.1, 1);
         }
         
-        /* 当 Tawk 聊天大视窗被彻底唤醒展开时，恢复整体交互机制 */
+        /* 激活 Tawk.to 大窗全屏覆盖 */
         body.tawk-open iframe[id^="tawk-"] {
             opacity: 1 !important;
             pointer-events: auto !important;
+            transform: translateY(0) !important;
             z-index: 999999 !important;
+        }
+
+        /* 纯 CSS 霓虹呼吸灯动效 */
+        .neon-border {
+            box-shadow: 0 0 15px rgba(255, 42, 116, 0.2), inset 0 0 15px rgba(255, 42, 116, 0.1);
+            border: 1px solid rgba(255, 42, 116, 0.3);
+        }
+
+        /* 闪烁打字点 */
+        .dot-pulse {
+            animation: bounce 1.2s infinite ease-in-out;
+        }
+        .dot-pulse:nth-child(2) { animation-delay: 0.2s; }
+        .dot-pulse:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); opacity: 0.3; }
+            50% { transform: translateY(-4px); opacity: 1; }
         }
     </style>
 </head>
-<body>
+<body class="min-height-screen flex flex-col justify-center items-center p-3 sm:p-6 antialiased selection:bg-pink-500 selection:text-white">
 
-    <div class="chat-container">
-        <!-- 頂部頭部欄 -->
-        <div class="chat-header">
-            <div class="avatar-container">
-                <img src="https://unsplash.com" alt="Avatar" class="avatar">
-                <div class="status-dot"></div>
-            </div>
-            <div class="user-info">
-                <h2>미미 (Mimi) ❤️ 24세</h2>
-                <p>🟢 실시간 접속 중...</p>
-            </div>
-            <div class="header-tag">🔥 1.2km 근처</div>
-        </div>
+    <!-- 主容器 -->
+    <div class="w-full max-w-[440px] h-[92vh] max-h-[840px] bg-[#131124]/90 rounded-[32px] border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden backdrop-blur-xl relative">
+        
+        <!-- 顶部高奢流光条 -->
+        <div class="h-[4px] w-full bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 animate-gradient"></div>
 
-        <!-- 聊天消息流區域 -->
-        <div class="chat-messages" id="chat-messages-container">
-            <div class="message incoming">
-                오빠, 아직 안 자고 뭐해? 외로워서 메시지 보냈어.. 🙈
-            </div>
-            <div class="message incoming">
-                여기 웹사이트는 렉이 좀 심하네.. 나랑 밤새 대화할래? 비밀 얘기하고 싶어!
-            </div>
-            
-            <!-- 打字状态指示器 -->
-            <div class="message typing-indicator" id="typing-box">
-                <div class="dot-container">
-                    <span class="dot-flashing"></span>
-                    <span class="dot-flashing"></span>
-                    <span class="dot-flashing"></span>
+        <!-- 头部个人主页栏 -->
+        <div class="px-5 py-4 bg-white/[0.02] border-b border-white/[0.06] flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <img src="https://unsplash.com" alt="Mimi" class="w-14 h-14 rounded-full object-cover ring-2 ring-[#ff2a74] p-[1px]">
+                    <div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-[#131124] animate-pulse"></div>
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-bold text-white text-base">지아 (Jia)</span>
+                        <span class="text-xs bg-pink-500/20 text-[#ff2a74] px-1.5 py-0.5 rounded-md font-bold">23세</span>
+                    </div>
+                    <p class="text-[11px] text-green-400 font-medium tracking-tight mt-0.5">⚡ 서울 · 내 주변 800m 이내</p>
                 </div>
             </div>
+            
+            <div class="flex flex-col items-end gap-1">
+                <span class="text-[10px] bg-white/5 border border-white/10 text-slate-300 px-2 py-0.5 rounded-full font-semibold">익명인증 완료</span>
+            </div>
         </div>
 
-        <!-- 核心引流按鈕區域 -->
-        <div class="action-area">
-            <div class="action-title">👇 미미와 끊김없이 1:1 비밀 대화하기 👇</div>
-            <!-- KakaoTalk 按钮触发 -->
-            <a href="javascript:void(0);" onclick="triggerTawkTo()" class="btn-sns btn-kakao">
-                <span>카카오톡으로 대화하기</span>
-            </a>
-            <!-- LINE 按钮触发 -->
-            <a href="javascript:void(0);" onclick="triggerTawkTo()" class="btn-sns btn-line">
-                <span>LINE으로 대화하기</span>
-            </a>
+        <!-- 核心聊天流显示区域 -->
+        <div id="chat-messages-container" class="flex-1 overflow-y-auto px-5 py-4 space-y-4 flex flex-col scroll-smooth">
+            
+            <!-- 系统时间安全提示 -->
+            <div class="flex justify-center my-1">
+                <span class="text-[10px] bg-white/5 border border-white/5 text-slate-400 px-3 py-1 rounded-xl text-center">
+                    🔒 종단간 암호화 보안 적용됨 · 1:1 비밀 채널
+                </span>
+            </div>
+
+            <!-- 消息 1 -->
+            <div class="flex flex-col items-start max-w-[85%] animate-[fadeIn_0.3s_ease-out]">
+                <div class="bg-white/10 text-slate-100 rounded-[20px] rounded-tl-none px-4 py-2.5 text-sm leading-relaxed shadow-sm">
+                    오빠 실시간 접속 맞아? 나 지금 너무 심심한데 대화 가능해? 🥺
+                </div>
+                <span class="text-[10px] text-slate-500 ml-1 mt-1">오후 2:45</span>
+            </div>
+
+            <!-- 消息 2 (视觉高光强化) -->
+            <div class="flex flex-col items-start max-w-[85%] animate-[fadeIn_0.4s_ease-out_delay-1s]">
+                <div class="bg-gradient-to-br from-[#ff2a74] to-[#8a2be2] text-white rounded-[20px] rounded-tl-none px-4 py-2.5 text-sm font-medium leading-relaxed shadow-[0_10px_20px_rgba(255,42,116,0.15)]">
+                    가까운데 살면 나중에 같이 술 한잔 할래? 먼저 나랑 여기서 비밀 얘기부터 하자! 밑에 눌러줘 ❤️
+                </div>
+                <span class="text-[10px] text-slate-500 ml-1 mt-1">오후 2:46</span>
+            </div>
+            
+            <!-- 高级打字指示器容器 -->
+            <div id="typing-box" class="flex items-center gap-1 bg-white/5 px-4 py-3 rounded-[20px] rounded-tl-none w-16 shadow-inner">
+                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full dot-pulse"></span>
+                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full dot-pulse"></span>
+                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full dot-pulse"></span>
+            </div>
+
         </div>
 
-        <!-- 底部输入框拦截触发栏 -->
-        <div class="fake-input-bar">
-            <input type="text" readonly class="real-input" placeholder="메시지를 입력하려면 여기에 탭하세요..." onclick="triggerTawkTo()">
-            <div class="fake-send" onclick="triggerTawkTo()">전송</div>
+        <!-- 强引流动态按钮区域 -->
+        <div class="p-4 bg-black/40 border-t border-white/[0.05] flex flex-col gap-2.5">
+            <div class="text-center text-[11px] text-slate-400 font-medium tracking-wide flex items-center justify-center gap-1">
+                <span>💬 1초만에 지아와 무제한 비밀 토크 연결</span>
+            </div>
+            
+            <!-- 黄金高光 KakaoTalk 触发器 -->
+            <button onclick="triggerTawkTo()" class="w-full bg-[#FEE500] hover:bg-[#efd700] active:scale-[0.98] text-[#191919] font-bold text-[15px] py-3.5 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-[0_4px_20px_rgba(254,229,0,0.15)]">
+                <!-- 预留极简图标形状 -->
+                <span class="w-5 h-5 bg-[#191919] rounded-lg text-[#FEE500] text-[11px] font-extrabold flex items-center justify-center">talk</span>
+                카카오톡으로 빠른 대화 시작
+            </button>
+
+            <!-- 霓虹科技 LINE 触发器 -->
+            <button onclick="triggerTawkTo()" class="w-full bg-[#06C755] hover:bg-[#05b34c] active:scale-[0.98] text-white font-bold text-[15px] py-3.5 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-[0_4px_20px_rgba(6,199,85,0.15)]">
+                <span class="w-5 h-5 bg-white rounded-full text-[#06C755] text-[12px] font-black flex items-center justify-center">L</span>
+                라인(LINE)으로 비밀 대화방 입장
+            </button>
         </div>
+
+        <!-- 底部拦截输入框栏 -->
+        <div class="px-4 py-3 bg-[#0d0b18] border-t border-white/[0.06] flex items-center gap-3 relative z-20">
+            <div class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-slate-400 cursor-pointer flex items-center justify-between" onclick="triggerTawkTo()">
+                <span>메시지를 입력하려면 여기에 탭하세요...</span>
+                <span class="text-[10px] text-slate-500">🔒 secure</span>
+            </div>
+            <button onclick="triggerTawkTo()" class="text-[#ff2a74] text-xs font-bold px-2 py-1 tracking-tight active:opacity-60">
+                전송
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Tawk.to 官方即时通信核心底层脚本 (100% 修复了参数索引节点报错) -->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    
+    Tawk_API.onChatMaximized = function(){
+        document.body.classList.add('tawk-open');
+    };
+    Tawk_API.onChatMinimized = function(){
+        document.body.classList.remove('tawk-open');
+    };
+
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0]; // 修复完毕：精确锚定 [0] 节点
+    s1.async=true;
+    s1.src='https://tawk.to'; // 修复完毕：去除空格阻断
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+
+    <!-- 顶层逻辑与仿真小姐姐发言脚本 -->
+    <script>
+        const msgContainer = document.getElementById('chat-messages-container');
+        msgContainer.scrollTop = msgContainer.scrollHeight;
+
+        // 全域高穿透无缝唤起大窗口
+        function triggerTawkTo() {
+            if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
+                window.Tawk_API.maximize();
+            } else {
+                alert("연결 중입니다. 잠시 후 다시 클릭해주세요.");
+            }
+        }
+
+        // 高动态心理诱导：3秒后自动清除打字组件，并追加终极逼真话术
+        setTimeout(() => {
+            const typingBox = document.getElementById('typing-box');
+            if (typingBox) {
+                typingBox.remove();
+                
+                const replyMsg = document.createElement('div');
+                replyMsg.className = 'flex flex-col items-start max-w-[85%] animate-[fadeIn_0.3s_ease-out]';
+                replyMsg.innerHTML = `
+                    <div class="bg-white/10 text-slate-100 rounded-[20px] rounded-tl-none px-4 py-2.5 text-sm leading-relaxed shadow-sm">
+                        기다리기 힘드니까 아래 노란색 버튼 누르고 들어와! 거기선 사진도 바로 보내줄게~ 💕
+                    </div>
+                    <span class="text-[10px] text-slate-500 ml-1 mt-1">오후 2:48</span>
+                `;
+                
