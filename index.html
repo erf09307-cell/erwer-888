@@ -88,6 +88,25 @@
             font-size: 16px;
         }
 
+        /* 图片展示区域自适应样式 */
+        .promo-image-box {
+            width: 100%;
+            max-width: 100%;
+            margin: 20px 0;
+            padding: 5px;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .promo-image-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
         /* 中部按钮容器：修改为左右并排布局 */
         .btn-container {
             display: flex;
@@ -205,14 +224,19 @@
                 <li>无需繁琐注册，即加即问</li>
             </ul>
 
-            <!-- 页面中部的主按钮组（已改为左右并排） -->
+            <!-- 图片已成功移动到优势列表下方 -->
+            <div class="promo-image-box">
+                <img src="photo_2026-10-09_22-38-36.jpg" alt="咨询服务宣传图">
+            </div>
+
+            <!-- 页面中部的主按钮组 -->
             <div class="btn-container">
-                <!-- LINE 按钮：请将下面链接末尾的“您的LINE_ID”改写为您的实际账号 -->
+                <!-- LINE 按钮：请将下面链接末尾的“https://line.me”改写为您的实际跳转链接 -->
                 <a href="https://line.me" class="cta-button btn-line" target="_blank">
                     <span class="brand-icon icon-line">L</span>添加 LINE
                 </a>
 
-                <!-- KakaoTalk 按钮：请将下面链接末尾的“您的Kakao_ID”改写为您的实际账号 -->
+                <!-- KakaoTalk 按钮：请将下面链接末尾的“https://kakao.com”改写为您的实际跳转链接 -->
                 <a href="https://kakao.com" class="cta-button btn-kakao" target="_blank">
                     <span class="brand-icon icon-kakao">K</span>添加 Kakao
                 </a>
@@ -220,7 +244,7 @@
         </div>
     </div>
 
-    <!-- 底部固定的双悬浮引流条（左右并排固定在屏幕底部） -->
+    <!-- 底部固定的双悬浮引流条 -->
     <div class="floating-bar">
         <!-- LINE 底部悬浮 -->
         <a href="https://line.me" class="floating-button btn-line" target="_blank">
