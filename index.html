@@ -1,184 +1,198 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>테라피 앤 바디케어 컨설팅 센터</title>
-    <!-- Tailwind CSS for high-fidelity luxury interface layout -->
-    <script src="https://tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专业在线咨询</title>
     <style>
-        @import url('https://jsdelivr.net');
-        body { 
-            font-family: 'Pretendard', -apple-system, sans-serif; 
-            background: linear-gradient(135deg, #111317 0%, #1a1d24 50%, #222731 100%);
-            background-attachment: fixed;
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* Stealth protection for native Tawk.to elements - triggered gracefully via overlay action hooks */
-        iframe[title="화상 채팅 전화를 수락함"], 
-        .tawk-min-container,
-        #tawk-chatpanel,
-        iframe[id^="tawk-"] {
-            opacity: 0 !important;
-            pointer-events: none !important;
-            transform: translateY(20px) scale(0.98);
-            transition: all 0.35s cubic-bezier(0.1, 1, 0.1, 1);
-        }
-        
-        /* Fully fluid interaction takeover upon Tawk.to trigger initialization */
-        body.tawk-open iframe[id^="tawk-"] {
-            opacity: 1 !important;
-            pointer-events: auto !important;
-            transform: translateY(0) scale(1) !important;
-            z-index: 999999 !important;
+        body {
+            background-color: #f7f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 80px; /* 为底部悬浮按钮留出空间 */
         }
 
-        .gold-pulse {
-            animation: bounce 1.2s infinite ease-in-out;
+        /* 顶部导航/横幅 */
+        .header {
+            background-color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        .gold-pulse:nth-child(2) { animation-delay: 0.2s; }
-        .gold-pulse:nth-child(3) { animation-delay: 0.4s; }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); opacity: 0.3; }
-            50% { transform: translateY(-4px); opacity: 1; }
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #111;
+        }
+
+        /* 主体内容区 */
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        /* 核心服务介绍卡片 */
+        .main-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            margin-bottom: 20px;
+        }
+
+        .headline {
+            font-size: 24px;
+            color: #111;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .subheadline {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        /* 核心亮点列表 */
+        .features-list {
+            text-align: left;
+            margin: 20px auto;
+            max-width: 80%;
+            list-style: none;
+        }
+
+        .features-list li {
+            font-size: 15px;
+            margin-bottom: 12px;
+            color: #444;
+            display: flex;
+            align-items: center;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            color: #06C755; /* LINE 绿色 */
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        /* 页面内核心大按钮 */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #06C755;
+            color: white;
+            text-decoration: none;
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(6, 199, 85, 0.4);
+            transition: transform 0.2s, background-color 0.2s;
+            width: 90%;
+            margin-top: 15px;
+        }
+
+        .cta-button:active {
+            transform: scale(0.98);
+            background-color: #05b34c;
+        }
+
+        /* 底部固定悬浮引流条 */
+        .floating-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.08);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .floating-button {
+            background-color: #06C755;
+            color: white;
+            text-decoration: none;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            padding: 14px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(6, 199, 85, 0.3);
+        }
+
+        /* LINE 品牌小绿点图标替代 */
+        .line-icon {
+            width: 20px;
+            height: 20px;
+            background: white;
+            color: #06C755;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 900;
+            margin-right: 8px;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-center items-center p-3 sm:p-6 antialiased selection:bg-amber-600 selection:text-white">
+<body>
 
-    <!-- Core Main Container -->
-    <div class="w-full max-w-[440px] h-[92vh] max-h-[820px] bg-[#14171d]/95 rounded-[32px] border border-amber-500/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.85)] flex flex-col overflow-hidden backdrop-blur-xl relative">
-        
-        <!-- Luxury Gold Aesthetic Header Border -->
-        <div class="h-[3px] w-full bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600"></div>
-
-        <!-- Upper Profile Header Section -->
-        <div class="px-5 py-4 bg-white/[0.01] border-b border-white/[0.06] flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="relative">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-600 to-amber-800 flex items-center justify-center text-xl shadow-md border border-amber-500/20">
-                        ✨
-                    </div>
-                    <div class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-[#14171d] animate-pulse"></div>
-                </div>
-                <div>
-                    <h1 class="font-bold text-white text-base">VIP 바디케어 매칭 센터</h1>
-                    <p class="text-[11px] text-amber-400/90 font-medium tracking-tight mt-0.5">🟢 실시간 프라이빗 코스 컨설팅 대기 중</p>
-                </div>
-            </div>
-            <span class="text-[10px] bg-amber-500/10 border border-amber-500/20 text-amber-400 px-2.5 py-0.5 rounded-full font-bold">보안 유지</span>
-        </div>
-
-        <!-- Simulated Dialogue Area -->
-        <div id="chat-messages-container" class="flex-1 overflow-y-auto px-5 py-4 space-y-4 flex flex-col scroll-smooth">
-            
-            <div class="flex justify-center my-1">
-                <span class="text-[10px] bg-white/5 border border-white/5 text-slate-400 px-3 py-1 rounded-xl text-center">
-                    🔒 종단간 암호화 적용 · 익명성이 안전하게 보장됩니다.
-                </span>
-            </div>
-
-            <!-- Welcoming Dialogue Bubble 1 -->
-            <div class="flex flex-col items-start max-w-[85%] animate-[fadeIn_0.3s_ease-out]">
-                <div class="bg-white/5 border border-white/10 text-slate-200 rounded-[20px] rounded-tl-none px-4 py-2.5 text-sm leading-relaxed shadow-sm">
-                    안녕하세요. 당신에게 가장 완벽한 힐링 테라피와 맞춤 스파 코스를 제안해 드리는 VIP 컨설팅 룸입니다. 🌿
-                </div>
-                <span class="text-[9px] text-slate-500 ml-1 mt-1">상담원</span>
-            </div>
-
-            <!-- Welcoming Dialogue Bubble 2 -->
-            <div class="flex flex-col items-start max-w-[85%] animate-[fadeIn_0.4s_ease-out_delay-1s]">
-                <div class="bg-gradient-to-br from-amber-900/50 via-stone-900/80 to-stone-950 text-amber-100 rounded-[20px] rounded-tl-none px-4 py-2.5 text-sm font-medium leading-relaxed border border-amber-500/20 shadow-[0_10px_20px_rgba(212,175,55,0.02)]">
-                    현재 이용 가능한 지역별 프라이빗 지점 안내, 특화 테라피 코스 세부 정보 및 전문 관리사 프로필을 1:1 비공개로 즉시 매칭해 드립니다. 아래 채널을 통해 바로 문의해 주세요. 👇
-                </div>
-                <span class="text-[9px] text-slate-500 ml-1 mt-1">상담원</span>
-            </div>
-            
-            <!-- High-Fidelity Typing Animation Track -->
-            <div id="typing-box" class="flex items-center gap-1 bg-white/5 px-4 py-3 rounded-[20px] rounded-tl-none w-16 border border-white/5 shadow-inner">
-                <span class="w-1.5 h-1.5 bg-amber-400 rounded-full gold-pulse"></span>
-                <span class="w-1.5 h-1.5 bg-amber-400 rounded-full gold-pulse"></span>
-                <span class="w-1.5 h-1.5 bg-amber-400 rounded-full gold-pulse"></span>
-            </div>
-
-        </div>
-
-        <!-- Program Fast-Selection Badges -->
-        <div class="px-4 pt-1 flex flex-wrap gap-2 justify-center">
-            <span onclick="triggerTawkTo()" class="text-[11px] bg-white/5 border border-white/10 hover:border-amber-500/40 text-slate-300 px-3 py-1.5 rounded-full cursor-pointer transition-all">⚜️ 시그니처 아로마 코스</span>
-            <span onclick="triggerTawkTo()" class="text-[11px] bg-white/5 border border-white/10 hover:border-amber-500/40 text-slate-300 px-3 py-1.5 rounded-full cursor-pointer transition-all">🔋 만성피로 리커버리 케어</span>
-            <span onclick="triggerTawkTo()" class="text-[11px] bg-white/5 border border-white/10 hover:border-amber-500/40 text-slate-300 px-3 py-1.5 rounded-full cursor-pointer transition-all">📍 주변 지점 위치 조회</span>
-        </div>
-
-        <!-- High-Conversion Instant SNS Communication CTA Framework -->
-        <div class="p-4 bg-black/20 border-t border-white/[0.05] flex flex-col gap-2.5 mt-2">
-            
-            <!-- KakaoTalk Instant Connection -->
-            <button onclick="triggerTawkTo()" class="w-full bg-[#FEE500] hover:bg-[#efd700] active:scale-[0.98] text-[#191919] font-bold text-[15px] py-3.5 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-md">
-                <span class="w-5 h-5 bg-[#191919] rounded-lg text-[#FEE500] text-[10px] font-black flex items-center justify-center">TALK</span>
-                카카오톡 연동 실시간 상담 시작
-            </button>
-
-            <!-- LINE Instant Connection -->
-            <button onclick="triggerTawkTo()" class="w-full bg-[#06C755] hover:bg-[#05b34c] active:scale-[0.98] text-white font-bold text-[15px] py-3.5 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-md">
-                <span class="w-5 h-5 bg-white rounded-full text-[#06C755] text-[11px] font-black flex items-center justify-center">L</span>
-                라인(LINE) 1:1 전담 매니저 매칭
-            </button>
-        </div>
-
-        <!-- Stealth Input Proxy Interceptor Footer Bar -->
-        <div class="px-4 py-3 bg-[#0a0c10] border-t border-white/[0.06] flex items-center gap-3 relative z-20">
-            <div class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-slate-400 cursor-pointer flex items-center justify-between" onclick="triggerTawkTo()">
-                <span>문의하실 내용을 입력하려면 여기를 터切하세요...</span>
-                <span class="text-[10px] text-amber-500 font-bold uppercase tracking-wider">Secure 🔒</span>
-            </div>
-            <button onclick="triggerTawkTo()" class="text-amber-500 text-xs font-bold px-2 py-1 active:opacity-60">
-                전송
-            </button>
-        </div>
-
+    <!-- 顶部导航栏 -->
+    <div class="header">
+        <div class="logo">🎯 在线专业咨询服务中心</div>
     </div>
 
-    <!-- Official Tawk.to Script Integration Layer (Fully Patched and Checked) -->
-    <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    
-    Tawk_API.onChatMaximized = function(){
-        document.body.classList.add('tawk-open');
-    };
-    Tawk_API.onChatMinimized = function(){
-        document.body.classList.remove('tawk-open');
-    };
+    <div class="container">
+        <!-- 核心业务卡牌 -->
+        <div class="main-card">
+            <h1 class="headline">专家1对1 实时在线答疑</h1>
+            <p class="subheadline">点击下方按钮直接跳转 LINE，免验证快速添加，即刻为您解答疑问</p>
+            
+            <!-- 业务优势介绍（可自由修改文本） -->
+            <ul class="features-list">
+                <li>专业顾问团队，全程保密咨询</li>
+                <li>提供量身定制的专属解决方案</li>
+                <li>无需繁琐注册，即加即问</li>
+            </ul>
 
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script"); // Fixed bracket initialization bug
-    s1.async=true;
-    s1.src='https://tawk.to'; // Space buffer removed
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-    </script>
+            <!-- 页面中部的主按钮：请将下方链接中的“您的LINE_ID”替换为您的真实ID -->
+            <a href="https://line.me" class="cta-button" target="_blank">
+                <span class="line-icon">L</span>点击添加 LINE 开启咨询
+            </a>
+        </div>
+    </div>
 
-    <!-- UI Interaction Dynamics Script -->
-    <script>
-        const msgContainer = document.getElementById('chat-messages-container');
-        msgContainer.scrollTop = msgContainer.scrollHeight;
+    <!-- 底部固定的悬浮引流按钮：确保用户随时可以点击 -->
+    <div class="floating-bar">
+        <!-- 请将下方链接中的“您的LINE_ID”替换为您的真实ID -->
+        <a href="https://line.me" class="floating-button" target="_blank">
+            <span class="line-icon">L</span>💬 立即在线咨询 (点此加LINE)
+        </a>
+    </div>
 
-        function triggerTawkTo() {
-            if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
-                window.Tawk_API.maximize();
-            } else {
-                alert("안전한 매칭 상담을 위해 전용 보안 채널을 할당 중입니다. 잠시 후 다시 시도해 주세요.");
-            }
-        }
-
-        // Live script delay handling: Replaces typing marker with text incentive after 3 seconds
-        setTimeout(() => {
-            const typingBox = document.getElementById('typing-box');
-            if (typingBox) {
-                typingBox.remove();
-                
-                const replyMsg = document.createElement('div');
-                replyMsg.className = 'flex flex-col items-start max-w-[85%] animate-[fadeIn_0.3s_ease-out]';
+</body>
+</html>
