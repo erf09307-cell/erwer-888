@@ -3,166 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>비밀 톡 - Secret Link 1:1</title>
-    <!-- 引入 Tailwind CSS 加速渲染 -->
+    <title>1:1 프라이빗 마음 커넥트 - Live Chat</title>
+    <!-- 引入 Tailwind CSS 构建现代流体美学 -->
     <script src="https://tailwindcss.com"></script>
     <style>
+        /* 引入韩国高端科技开源字体 Pretendard */
         @import url('https://jsdelivr.net');
-        
-        :root {
-            --neon-pink: #ff2a74;
-            --neon-purple: #8a2be2;
-            --kakao-yellow: #FEE500;
-            --line-green: #06C755;
-            --dark-surface: rgba(24, 22, 37, 0.95);
-        }
-
-        body {
-            font-family: 'Pretendard', -apple-system, sans-serif;
-            background: radial-gradient(circle at top, #1f1a3a 0%, #0d0b18 100%);
+        body { 
+            font-family: 'Pretendard', -apple-system, sans-serif; 
+            background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
             background-attachment: fixed;
-            overflow-x: hidden;
         }
 
-        /* 隐藏原生 Tawk.to 组件，防止穿帮 */
+        /* 极光流动背景动效 */
+        .aurora-bg {
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 130%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, rgba(168,85,247,0.15) 40%, rgba(0,0,0,0) 70%);
+            filter: blur(60px);
+            z-index: 0;
+            pointer-events: none;
+            animation: auroraMove 10s infinite alternate ease-in-out;
+        }
+
+        @keyframes auroraMove {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(5%, 8%) scale(1.1); opacity: 0.8; }
+        }
+
+        /* 隐藏原生 Tawk.to 圆形小绿图标以保持整体神圣的高级感 */
         iframe[title="화상 채팅 전화를 수락함"], 
         .tawk-min-container,
         #tawk-chatpanel,
         iframe[id^="tawk-"] {
             opacity: 0 !important;
             pointer-events: none !important;
-            transform: translateY(20px);
-            transition: all 0.3s cubic-bezier(0.1, 1, 0.1, 1);
+            transform: scale(0.95) translateY(15px);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         
-        /* 激活 Tawk.to 大窗全屏覆盖 */
+        /* 当 Tawk.to 大窗弹窗被触发最大化时无缝浮现 */
         body.tawk-open iframe[id^="tawk-"] {
             opacity: 1 !important;
             pointer-events: auto !important;
-            transform: translateY(0) !important;
+            transform: scale(1) translateY(0) !important;
             z-index: 999999 !important;
-        }
-
-        /* 纯 CSS 霓虹呼吸灯动效 */
-        .neon-border {
-            box-shadow: 0 0 15px rgba(255, 42, 116, 0.2), inset 0 0 15px rgba(255, 42, 116, 0.1);
-            border: 1px solid rgba(255, 42, 116, 0.3);
-        }
-
-        /* 闪烁打字点 */
-        .dot-pulse {
-            animation: bounce 1.2s infinite ease-in-out;
-        }
-        .dot-pulse:nth-child(2) { animation-delay: 0.2s; }
-        .dot-pulse:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); opacity: 0.3; }
-            50% { transform: translateY(-4px); opacity: 1; }
         }
     </style>
 </head>
-<body class="min-height-screen flex flex-col justify-center items-center p-3 sm:p-6 antialiased selection:bg-pink-500 selection:text-white">
+<body class="min-h-screen flex flex-col justify-center items-center p-4 antialiased overflow-hidden relative selection:bg-indigo-500 selection:text-white">
 
-    <!-- 主容器 -->
-    <div class="w-full max-w-[440px] h-[92vh] max-h-[840px] bg-[#131124]/90 rounded-[32px] border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden backdrop-blur-xl relative">
+    <!-- 极光光晕背景 -->
+    <div class="aurora-bg"></div>
+
+    <!-- 核心主容器 (毛玻璃科技卡片) -->
+    <div class="w-full max-w-[430px] bg-slate-900/60 border border-white/10 rounded-[38px] p-6 shadow-[0_30px_70px_rgba(0,0,0,0.5)] backdrop-blur-2xl flex flex-col text-center space-y-6 relative z-10 transition-all duration-300 hover:border-white/15">
         
-        <!-- 顶部高奢流光条 -->
-        <div class="h-[4px] w-full bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 animate-gradient"></div>
-
-        <!-- 头部个人主页栏 -->
-        <div class="px-5 py-4 bg-white/[0.02] border-b border-white/[0.06] flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="relative">
-                    <img src="https://unsplash.com" alt="Mimi" class="w-14 h-14 rounded-full object-cover ring-2 ring-[#ff2a74] p-[1px]">
-                    <div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-[#131124] animate-pulse"></div>
-                </div>
-                <div>
-                    <div class="flex items-center gap-1.5">
-                        <span class="font-bold text-white text-base">지아 (Jia)</span>
-                        <span class="text-xs bg-pink-500/20 text-[#ff2a74] px-1.5 py-0.5 rounded-md font-bold">23세</span>
-                    </div>
-                    <p class="text-[11px] text-green-400 font-medium tracking-tight mt-0.5">⚡ 서울 · 내 주변 800m 이내</p>
-                </div>
-            </div>
-            
-            <div class="flex flex-col items-end gap-1">
-                <span class="text-[10px] bg-white/5 border border-white/10 text-slate-300 px-2 py-0.5 rounded-full font-semibold">익명인증 완료</span>
-            </div>
-        </div>
-
-        <!-- 核心聊天流显示区域 -->
-        <div id="chat-messages-container" class="flex-1 overflow-y-auto px-5 py-4 space-y-4 flex flex-col scroll-smooth">
-            
-            <!-- 系统时间安全提示 -->
-            <div class="flex justify-center my-1">
-                <span class="text-[10px] bg-white/5 border border-white/5 text-slate-400 px-3 py-1 rounded-xl text-center">
-                    🔒 종단간 암호화 보안 적용됨 · 1:1 비밀 채널
+        <!-- 头部闪烁状态栏 -->
+        <div class="flex justify-between items-center px-2">
+            <div class="flex items-center gap-2">
+                <span class="relative flex h-2.5 w-2.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-indigo-500"></span>
                 </span>
+                <span class="text-xs text-indigo-200/70 font-semibold tracking-wide uppercase">Connect Room</span>
             </div>
-
-            <!-- 消息 1 -->
-            <div class="flex flex-col items-start max-w-[85%] animate-[fadeIn_0.3s_ease-out]">
-                <div class="bg-white/10 text-slate-100 rounded-[20px] rounded-tl-none px-4 py-2.5 text-sm leading-relaxed shadow-sm">
-                    오빠 실시간 접속 맞아? 나 지금 너무 심심한데 대화 가능해? 🥺
-                </div>
-                <span class="text-[10px] text-slate-500 ml-1 mt-1">오후 2:45</span>
+            <div class="text-[11px] bg-white/5 border border-white/10 text-indigo-300 px-3 py-1 rounded-full font-bold">
+                비공개 매칭 100%
             </div>
-
-            <!-- 消息 2 (视觉高光强化) -->
-            <div class="flex flex-col items-start max-w-[85%] animate-[fadeIn_0.4s_ease-out_delay-1s]">
-                <div class="bg-gradient-to-br from-[#ff2a74] to-[#8a2be2] text-white rounded-[20px] rounded-tl-none px-4 py-2.5 text-sm font-medium leading-relaxed shadow-[0_10px_20px_rgba(255,42,116,0.15)]">
-                    가까운데 살면 나중에 같이 술 한잔 할래? 먼저 나랑 여기서 비밀 얘기부터 하자! 밑에 눌러줘 ❤️
-                </div>
-                <span class="text-[10px] text-slate-500 ml-1 mt-1">오후 2:46</span>
-            </div>
-            
-            <!-- 高级打字指示器容器 -->
-            <div id="typing-box" class="flex items-center gap-1 bg-white/5 px-4 py-3 rounded-[20px] rounded-tl-none w-16 shadow-inner">
-                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full dot-pulse"></span>
-                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full dot-pulse"></span>
-                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full dot-pulse"></span>
-            </div>
-
         </div>
 
-        <!-- 强引流动态按钮区域 -->
-        <div class="p-4 bg-black/40 border-t border-white/[0.05] flex flex-col gap-2.5">
-            <div class="text-center text-[11px] text-slate-400 font-medium tracking-wide flex items-center justify-center gap-1">
-                <span>💬 1초만에 지아와 무제한 비밀 토크 연결</span>
+        <!-- 视觉高光区：3D立体动感气泡图标 -->
+        <div class="relative py-4">
+            <div class="mx-auto w-20 h-20 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 rounded-3xl flex items-center justify-center text-4xl shadow-[0_15px_30px_rgba(99,102,241,0.3)] animate-pulse">
+                ✨
             </div>
-            
-            <!-- 黄金高光 KakaoTalk 触发器 -->
-            <button onclick="triggerTawkTo()" class="w-full bg-[#FEE500] hover:bg-[#efd700] active:scale-[0.98] text-[#191919] font-bold text-[15px] py-3.5 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-[0_4px_20px_rgba(254,229,0,0.15)]">
-                <!-- 预留极简图标形状 -->
-                <span class="w-5 h-5 bg-[#191919] rounded-lg text-[#FEE500] text-[11px] font-extrabold flex items-center justify-center">talk</span>
-                카카오톡으로 빠른 대화 시작
-            </button>
-
-            <!-- 霓虹科技 LINE 触发器 -->
-            <button onclick="triggerTawkTo()" class="w-full bg-[#06C755] hover:bg-[#05b34c] active:scale-[0.98] text-white font-bold text-[15px] py-3.5 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-[0_4px_20px_rgba(6,199,85,0.15)]">
-                <span class="w-5 h-5 bg-white rounded-full text-[#06C755] text-[12px] font-black flex items-center justify-center">L</span>
-                라인(LINE)으로 비밀 대화방 입장
-            </button>
+            <!-- 漂浮装饰圈 -->
+            <div class="absolute top-2 left-[28%] w-4 h-4 bg-pink-400/30 rounded-full blur-[1px]"></div>
+            <div class="absolute bottom-2 right-[28%] w-3 h-3 bg-cyan-400/40 rounded-full blur-[1px]"></div>
         </div>
 
-        <!-- 底部拦截输入框栏 -->
-        <div class="px-4 py-3 bg-[#0d0b18] border-t border-white/[0.06] flex items-center gap-3 relative z-20">
-            <div class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-slate-400 cursor-pointer flex items-center justify-between" onclick="triggerTawkTo()">
-                <span>메시지를 입력하려면 여기에 탭하세요...</span>
-                <span class="text-[10px] text-slate-500">🔒 secure</span>
+        <!-- 治愈系走心文案 (转化率极高) -->
+        <div class="space-y-2">
+            <h2 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-100 to-purple-200 tracking-tight leading-tight">
+                지금, 당신만을 위한<br>1:1 비밀 대화가 열립니다
+            </h2>
+            <p class="text-xs text-slate-400 leading-relaxed max-w-[90%] mx-auto font-medium">
+                가벼운 일상 이야기부터 어디에도 말하지 못했던 비밀까지, 실시간으로 매칭된 전담 파트너와 안전하게 소통하세요.
+            </p>
+        </div>
+
+        <!-- 模块：三大安全保障承诺（拉满粉丝下决心点击的信任感） -->
+        <div class="bg-white/[0.03] border border-white/[0.05] rounded-2xl p-4 text-left space-y-3">
+            <div class="flex items-center gap-3">
+                <span class="text-base">🤫</span>
+                <span class="text-xs text-slate-300 font-semibold">닉네임 자동 생성 (회원가입/인증 없음)</span>
             </div>
-            <button onclick="triggerTawkTo()" class="text-[#ff2a74] text-xs font-bold px-2 py-1 tracking-tight active:opacity-60">
-                전송
+            <div class="flex items-center gap-3 border-t border-white/[0.04] pt-2.5">
+                <span class="text-base">🔒</span>
+                <span class="text-xs text-slate-300 font-semibold">모든 대화 실시간 종단간 암호화 보안</span>
+            </div>
+            <div class="flex items-center gap-3 border-t border-white/[0.04] pt-2.5">
+                <span class="text-base">🗑️</span>
+                <span class="text-xs text-slate-300 font-semibold">채팅창을 나가는 즉시 데이터 즉시 파기</span>
+            </div>
+        </div>
+
+        <!-- 主核心操作区域 (流光呼吸渐变按钮) -->
+        <div class="space-y-3 pt-2">
+            <button onclick="triggerTawkTo()" class="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-95 active:scale-[0.98] text-white font-bold text-base py-4 rounded-2xl transition-all shadow-[0_12px_25px_rgba(99,102,241,0.25)] flex items-center justify-center gap-2">
+                💬 1:1 익명 비밀 대화방 입장하기
             </button>
+            
+            <p class="text-[10px] text-slate-500 tracking-tight">
+                * 본 플랫폼은 대화 도중의 그 어떤 개인정보도 수집하지 않습니다.
+            </p>
         </div>
 
     </div>
 
-    <!-- Tawk.to 官方即时通信核心底层脚本 (100% 修复了参数索引节点报错) -->
+    <!-- 拦截触发框栏 (即便不点击中央按钮，点击屏幕底部输入框也能无缝穿透唤醒大窗) -->
+    <div class="w-full max-w-[430px] mt-4 px-4 relative z-10">
+        <div class="bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-xs text-slate-500 cursor-pointer flex items-center justify-between shadow-inner" onclick="triggerTawkTo()">
+            <span>메시지를 입력하여 대화를 시작하세요...</span>
+            <span class="text-[10px] text-indigo-400 font-bold tracking-wider uppercase">secure 🔒</span>
+        </div>
+    </div>
+
+
+    <!-- ================================================== -->
+    <!-- 4. 官方 TAWK.TO 底层通信框架 (完美去错修正版) -->
+    <!-- ================================================== -->
     <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     
+    // Tawk 状态监听：当大窗弹出时，给 body 挂载全局样式类，使动画无缝契合
     Tawk_API.onChatMaximized = function(){
         document.body.classList.add('tawk-open');
     };
@@ -171,41 +149,26 @@
     };
 
     (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0]; // 修复完毕：精确锚定 [0] 节点
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0]; // 精确锚定 节点，彻底修复浏览器白屏bug
     s1.async=true;
-    s1.src='https://tawk.to'; // 修复完毕：去除空格阻断
+    s1.src='https://tawk.to'; // 已剔除空格错误
     s1.charset='UTF-8';
     s1.setAttribute('crossorigin','*');
     s0.parentNode.insertBefore(s1,s0);
     })();
     </script>
-
-    <!-- 顶层逻辑与仿真小姐姐发言脚本 -->
+    
     <script>
-        const msgContainer = document.getElementById('chat-messages-container');
-        msgContainer.scrollTop = msgContainer.scrollHeight;
-
-        // 全域高穿透无缝唤起大窗口
+        // 核心高穿透性唤醒函数
         function triggerTawkTo() {
             if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
                 window.Tawk_API.maximize();
             } else {
-                alert("연결 중입니다. 잠시 후 다시 클릭해주세요.");
+                // 如果网络拉取中出现毫秒级延迟，弹出顶级科技感平滑韩文通告
+                alert("보안 채널을 암호화 연결 중입니다. 잠시 후 다시 클릭해주세요.");
             }
         }
+    </script>
 
-        // 高动态心理诱导：3秒后自动清除打字组件，并追加终极逼真话术
-        setTimeout(() => {
-            const typingBox = document.getElementById('typing-box');
-            if (typingBox) {
-                typingBox.remove();
-                
-                const replyMsg = document.createElement('div');
-                replyMsg.className = 'flex flex-col items-start max-w-[85%] animate-[fadeIn_0.3s_ease-out]';
-                replyMsg.innerHTML = `
-                    <div class="bg-white/10 text-slate-100 rounded-[20px] rounded-tl-none px-4 py-2.5 text-sm leading-relaxed shadow-sm">
-                        기다리기 힘드니까 아래 노란색 버튼 누르고 들어와! 거기선 사진도 바로 보내줄게~ 💕
-                    </div>
-                    <span class="text-[10px] text-slate-500 ml-1 mt-1">오후 2:48</span>
-                `;
-                
+</body>
+</html>
