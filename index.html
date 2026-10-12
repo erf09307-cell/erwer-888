@@ -156,6 +156,13 @@
             background: rgba(255, 255, 255, 0.04);
             padding: 12px 20px;
             align-self: flex-start;
+            border-top-left-radius: 4px;
+        }
+
+        .dot-container {
+            display: flex;
+            align-items: center;
+            height: 14px;
         }
 
         .dot-flashing {
@@ -164,7 +171,6 @@
             height: 6px;
             border-radius: 50%;
             background-color: #aaa;
-            color: #aaa;
             animation: dotFlashing 1s infinite linear;
             display: inline-block;
             margin: 0 4px;
@@ -224,13 +230,7 @@
             color: var(--kakao-text);
         }
 
-        .sns-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 10px;
-        }
-
-        /* 底部输入框拦截触发栏（一碰就弹出SaleSmartly原生聊天窗） */
+        /* 底部输入框拦截触发栏 */
         .fake-input-bar {
             display: flex;
             padding: 12px 20px;
@@ -266,10 +266,21 @@
             user-select: none;
         }
 
-        /* 静默隐藏右下角的原生圆形图标，保持网页美观度，当男粉点输入框时官方大弹窗会瞬间正常出现 */
-        .ss-widget-button, [id^="salesmartly-"].ss-widget-button {
+        /* 隐藏右下角 Tawk.to 的小圆形图标，防止样式突兀 */
+        iframe[title="화상 채팅 전화를 수락함"], 
+        .tawk-min-container,
+        #tawk-chatpanel,
+        iframe[id^="tawk-"] {
             opacity: 0 !important;
             pointer-events: none !important;
+            transition: opacity 0.2s ease-in-out;
+        }
+        
+        /* 当 Tawk 聊天大视窗被唤醒展开时，恢复显示，防止白屏 */
+        body.tawk-open iframe[id^="tawk-"] {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            z-index: 999999 !important;
         }
     </style>
 </head>
@@ -290,23 +301,41 @@
         </div>
 
         <!-- 聊天消息流區域 -->
-        <div class="chat-messages" id="chatBox"></div>
-
-        <!-- LINE 和 KakaoTalk 核心按鈕区域 -->
-        <div class="action-area">
-            <div class="action-title">✨ 아래 버튼을 눌러 미미와 비밀 대화를 시작하세요 👇</div>
+        <div class="chat-messages" id="chat-messages-container">
+            <div class="message incoming">
+                오빠, 아직 안 자고 뭐해? 외로워서 메시지 보냈어.. 🙈
+            </div>
+            <div class="message incoming">
+                여기 웹사이트는 렉이 좀 심하네.. 나랑 밤새 대화할래? 비밀 얘기하고 싶어!
+            </div>
             
-            <!-- LINE 按钮 - 上线前把 href 替换成你真正的 LINE 加友链接 -->
-            <a href="https://line.me" target="_blank" class="btn-sns btn-line">
-                <svg class="sns-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 10.3c0-4.6-4.7-8.3-10.5-8.3C4.7 2 0 5.7 0 10.3c0 4.1 3.7 7.6 8.8 8.2.3 0 .8.3.9.7.1.3.1.7 0 1.1l-.4 2.4c-.1.5.2.2.4 0l2.7-2.5c.2-.2.4-.3.7-.3 3.6 0 10.9-2.5 10.9-9.6zm-14.8 2.1H7.7c-.3 0-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5s.5.2.5.5v3.5h1.1c.3 0 .5.2.5.5s-.2.5-.6.5zm2.7-.5c0 .3-.2.5-.5.5s-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5s.5.2.5.5v4zm3.9 0c0 .3-.2.5-.5.5h-1.9c-.3 0-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5s.5.2.5.5v3.5h1.4c.3 0 .5.2.5.5zm3.1-1.5c.3 0 .5.2.5.5s-.2.5-.5.5h-1.4v1h1.4c.3 0 .5.2.5.5s-.2.5-.5.5h-1.9c-.3 0-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5h1.9c-.3 0 .5.2.5.5s-.2.5-.5.5h-1.4v1h1.4z"/></svg>
-                미미의 LINE 추가하기 (添加 LINE)
-            </a>
+            <!-- 打字状态指示器 -->
+            <div class="message typing-indicator" id="typing-box">
+                <div class="dot-container">
+                    <span class="dot-flashing"></span>
+                    <span class="dot-flashing"></span>
+                    <span class="dot-flashing"></span>
+                </div>
+            </div>
+        </div>
 
-            <!-- KakaoTalk 按钮 - 上线前把 href 替换成你真正的 Kakao 加友链接 -->
-            <a href="https://kakao.com" target="_blank" class="btn-sns btn-kakao">
-                <svg class="sns-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-5.52 0-10 3.478-10 7.77 0 2.76 1.83 5.185 4.58 6.56-.19.69-.69 2.51-.79 2.9.13.01.27 0 .39-.08.97-.65 4.53-3.1 5.17-3.53.22.03.43.04.65.04 5.52 0 10-3.478 10-7.77S17.52 3 12 3z"/></svg>
-                미미의 카카오톡 추가 (添加 KakaoTalk)
+        <!-- 核心引流按鈕區域 -->
+        <div class="action-area">
+            <div class="action-title">👇 미미와 끊김없이 1:1 비밀 대화하기 👇</div>
+            <!-- KakaoTalk 触发 -->
+            <a href="javascript:void(0);" onclick="triggerTawkTo()" class="btn-sns btn-kakao">
+                <span>카카오톡으로 대화하기</span>
+            </a>
+            <!-- LINE 触发 -->
+            <a href="javascript:void(0);" onclick="triggerTawkTo()" class="btn-sns btn-line">
+                <span>LINE으로 대화하기</span>
             </a>
         </div>
 
+        <!-- 底部输入框拦截触发栏 -->
         <div class="fake-input-bar">
+            <input type="text" readonly class="real-input" placeholder="메시지를 입력하려면 여기에 탭하세요..." onclick="triggerTawkTo()">
+            <div class="fake-send" onclick="triggerTawkTo()">전송</div>
+        </div>
+    </div>
+
