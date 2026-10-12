@@ -266,7 +266,7 @@
             user-select: none;
         }
 
-        /* 隐藏右下角 Tawk.to 的小圆形图标，防止样式突兀 */
+        /* 隐藏右下角 Tawk.to 的原生小圆形图标，保持落地页美观 */
         iframe[title="화상 채팅 전화를 수락함"], 
         .tawk-min-container,
         #tawk-chatpanel,
@@ -276,7 +276,7 @@
             transition: opacity 0.2s ease-in-out;
         }
         
-        /* 当 Tawk 聊天大视窗被唤醒展开时，恢复显示，防止白屏 */
+        /* 当 Tawk 聊天大视窗被彻底唤醒展开时，恢复整体交互机制 */
         body.tawk-open iframe[id^="tawk-"] {
             opacity: 1 !important;
             pointer-events: auto !important;
@@ -322,11 +322,11 @@
         <!-- 核心引流按鈕區域 -->
         <div class="action-area">
             <div class="action-title">👇 미미와 끊김없이 1:1 비밀 대화하기 👇</div>
-            <!-- KakaoTalk 触发 -->
+            <!-- KakaoTalk 按钮触发 -->
             <a href="javascript:void(0);" onclick="triggerTawkTo()" class="btn-sns btn-kakao">
                 <span>카카오톡으로 대화하기</span>
             </a>
-            <!-- LINE 触发 -->
+            <!-- LINE 按钮触发 -->
             <a href="javascript:void(0);" onclick="triggerTawkTo()" class="btn-sns btn-line">
                 <span>LINE으로 대화하기</span>
             </a>
@@ -337,5 +337,3 @@
             <input type="text" readonly class="real-input" placeholder="메시지를 입력하려면 여기에 탭하세요..." onclick="triggerTawkTo()">
             <div class="fake-send" onclick="triggerTawkTo()">전송</div>
         </div>
-    </div>
-
