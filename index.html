@@ -3,55 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>비밀 톡 - Secret Link 1:1</title>
+    <title>테라피 & 아로마 스파 - 1:1 예약 센터</title>
+    <!-- 引入 Tailwind CSS 提供奢华视觉排版 -->
     <script src="https://tailwindcss.com"></script>
     <style>
         @import url('https://jsdelivr.net');
         body { 
             font-family: 'Pretendard', -apple-system, sans-serif; 
-            background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+            background: linear-gradient(135deg, #0b1311 0%, #121e1a 50%, #1a2a25 100%);
             background-attachment: fixed;
         }
 
-        .aurora-bg {
-            position: absolute;
-            top: -20%;
-            left: -10%;
-            width: 130%;
-            height: 60%;
-            background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, rgba(168,85,247,0.15) 40%, rgba(0,0,0,0) 70%);
-            filter: blur(60px);
-            z-index: 0;
-            pointer-events: none;
-            animation: auroraMove 10s infinite alternate ease-in-out;
-        }
-
-        @keyframes auroraMove {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(5%, 8%) scale(1.1); opacity: 0.8; }
-        }
-
-        /* 隐藏原生 Tawk.to 挂件 */
+        /* 隐藏原生 Tawk.to 圆形挂件，改由页面内的高级金色按钮和输入框完美穿透唤醒 */
         iframe[title="화상 채팅 전화를 수락함"], 
         .tawk-min-container,
         #tawk-chatpanel,
         iframe[id^="tawk-"] {
             opacity: 0 !important;
             pointer-events: none !important;
-            transition: all 0.3s ease-in-out;
+            transform: translateY(20px) scale(0.98);
+            transition: all 0.35s cubic-bezier(0.1, 1, 0.1, 1);
         }
         
+        /* 当 Tawk.to 大窗弹窗被唤醒时全局接管显示 */
         body.tawk-open iframe[id^="tawk-"] {
             opacity: 1 !important;
             pointer-events: auto !important;
+            transform: translateY(0) scale(1) !important;
             z-index: 999999 !important;
         }
 
-        .dot-pulse {
+        /* 暗金霓虹呼吸灯动效 */
+        .gold-glow {
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+        }
+
+        .dot-bounce {
             animation: bounce 1.2s infinite ease-in-out;
         }
-        .dot-pulse:nth-child(2) { animation-delay: 0.2s; }
-        .dot-pulse:nth-child(3) { animation-delay: 0.4s; }
+        .dot-bounce:nth-child(2) { animation-delay: 0.2s; }
+        .dot-bounce:nth-child(3) { animation-delay: 0.4s; }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); opacity: 0.3; }
@@ -59,125 +51,147 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-center items-center p-4 antialiased overflow-hidden relative">
+<body class="min-h-screen flex flex-col justify-center items-center p-3 sm:p-6 antialiased selection:bg-amber-600 selection:text-white">
 
-    <div class="aurora-bg"></div>
-
-    <!-- 核心主容器 -->
-    <div class="w-full max-w-[430px] h-[90vh] max-h-[800px] bg-slate-900/60 border border-white/10 rounded-[38px] p-5 shadow-[0_30px_70px_rgba(0,0,0,0.5)] backdrop-blur-2xl flex flex-col text-center justify-between relative z-10">
+    <!-- 主容器 (深墨绿高贵质感卡片) -->
+    <div class="w-full max-w-[440px] h-[92vh] max-h-[820px] bg-[#0c1513]/95 rounded-[32px] border border-amber-500/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden backdrop-blur-xl relative">
         
-        <!-- 头部 -->
-        <div class="flex justify-between items-center px-2 pt-2">
-            <div class="flex items-center gap-2">
-                <span class="relative flex h-2.5 w-2.5">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-indigo-500"></span>
-                </span>
-                <span class="text-xs text-indigo-200/70 font-semibold uppercase">Secure Connect</span>
-            </div>
-            <div class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2.5 py-0.5 rounded-full font-bold">
-                🟢 상담원 대기중
-            </div>
-        </div>
+        <!-- 顶部奢华金流光条 -->
+        <div class="h-[3px] w-full bg-gradient-to-r from-amber-200 via-yellow-500 to-amber-700"></div>
 
-        <!-- 聊天信息展示区 -->
-        <div id="custom-chat-box" class="flex-1 overflow-y-auto my-4 p-2 space-y-4 flex flex-col text-left">
-            <div class="text-center my-1">
-                <span class="text-[10px] bg-white/5 text-slate-400 px-3 py-1 rounded-xl">
-                    🔒 1:1 실시간 보안 암호화 채널이 개설되었습니다
-                </span>
-            </div>
-
-            <!-- 小姐姐话术 -->
-            <div class="flex flex-col items-start max-w-[85%]">
-                <div class="bg-white/10 text-slate-100 rounded-[20px] rounded-tl-none px-4 py-2.5 text-sm leading-relaxed">
-                    안녕하세요! 무엇을 도와드릴까요? 상담을 시작하려면 아래에 메시지를 입력하시거나 버튼을 눌러주세요. ✨
+        <!-- 头部导航与状态栏 -->
+        <div class="px-5 py-4 bg-white/[0.01] border-b border-amber-500/10 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <!-- 预留高档理疗/精油/水疗会所仿真头像 -->
+                    <div class="w-13 h-13 rounded-full bg-gradient-to-br from-amber-600 to-amber-900 p-[1px] flex items-center justify-center text-2xl border border-amber-500/30">
+                        💆‍♀️
+                    </div>
+                    <div class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-[#0c1513] animate-pulse"></div>
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-bold text-white text-base">아로마 테라피 VIP 예약</span>
+                    </div>
+                    <p class="text-[11px] text-amber-400 font-medium tracking-tight mt-0.5">🟢 현재 1:1 맞춤 상담 및 코스 안내 가능</p>
                 </div>
             </div>
-
-            <!-- 动态消息插入锚点 -->
-            <div id="typing-box" class="flex items-center gap-1 bg-white/5 px-4 py-3 rounded-[20px] rounded-tl-none w-16 shadow-inner">
-                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full dot-pulse"></span>
-                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full dot-pulse"></span>
-                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full dot-pulse"></span>
-            </div>
+            
+            <span class="text-[10px] bg-amber-500/10 border border-amber-500/20 text-amber-400 px-2.5 py-0.5 rounded-full font-bold">100% 비공개</span>
         </div>
 
-        <!-- 引流与输入区域 -->
-        <div class="space-y-3">
-            <div class="bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-xs text-slate-400 flex items-center justify-between shadow-inner">
-                <!-- 真实输入框，如果 Tawk 挂了，输入文字按回车也能直接在网页里聊 -->
-                <input id="custom-input" type="text" placeholder="여기에 메시지를 입력하세요..." class="bg-transparent w-full text-white outline-none placeholder:text-slate-500" onkeypress="if(event.key === 'Enter') handleUserSend()">
-                <span onclick="handleUserSend()" class="text-indigo-400 font-bold ml-2 cursor-pointer">전송</span>
+        <!-- 消息流区域 -->
+        <div id="chat-messages-container" class="flex-1 overflow-y-auto px-5 py-4 space-y-4 flex flex-col scroll-smooth">
+            
+            <!-- 隐私合规告示 -->
+            <div class="flex justify-center my-1">
+                <span class="text-[10px] bg-white/5 border border-white/5 text-slate-400 px-3 py-1 rounded-xl text-center">
+                    🔒 개인정보 보호 프로토콜 적용 · 대화 내용은 저장되지 않습니다.
+                </span>
             </div>
 
-            <button onclick="triggerTawkTo()" class="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-95 active:scale-[0.98] text-white font-bold text-sm py-4 rounded-2xl transition-all shadow-lg flex items-center justify-center gap-2">
-                💬 카카오톡 / 라인 실시간 상담 연동
+            <!-- 客服诱导话术 1 -->
+            <div class="flex flex-col items-start max-w-[85%] animate-[fadeIn_0.3s_theme]">
+                <div class="bg-white/5 border border-white/10 text-slate-200 rounded-[20px] rounded-tl-none px-4 py-2.5 text-sm leading-relaxed shadow-sm">
+                    안녕하세요. 지친 일상에 완벽한 휴식을 선사하는 프리미엄 스파 테라피 센터입니다. 💆‍♂️✨
+                </div>
+                <span class="text-[9px] text-slate-500 ml-1 mt-1">실시간</span>
+            </div>
+
+            <!-- 客服诱导话术 2 -->
+            <div class="flex flex-col items-start max-w-[85%] animate-[fadeIn_0.4s_theme_delay-1s]">
+                <div class="bg-gradient-to-br from-amber-700 via-amber-800 to-stone-900 text-amber-100 rounded-[20px] rounded-tl-none px-4 py-2.5 text-sm font-medium leading-relaxed border border-amber-500/20 shadow-[0_10px_20px_rgba(212,175,55,0.05)]">
+                    현재 계신 위치 주변의 이용 가능한 프라이빗 코스, 스웨디시, 타이 케어 및 매니저 프로필 정보와 상세 금액을 안내해 드립니다. 아래 버튼을 눌러 바로 대화를 시작해 주세요! 👇❤️
+                </div>
+                <span class="text-[9px] text-slate-500 ml-1 mt-1">실시간</span>
+            </div>
+            
+            <!-- 打字动画 -->
+            <div id="typing-box" class="flex items-center gap-1 bg-white/5 px-4 py-3 rounded-[20px] rounded-tl-none w-16 shadow-inner border border-white/5">
+                <span class="w-1.5 h-1.5 bg-amber-400 rounded-full dot-bounce"></span>
+                <span class="w-1.5 h-1.5 bg-amber-400 rounded-full dot-bounce"></span>
+                <span class="w-1.5 h-1.5 bg-amber-400 rounded-full dot-bounce"></span>
+            </div>
+
+        </div>
+
+        <!-- 极具吸引力的项目快捷选择（点击直接唤醒聊天并带入语境） -->
+        <div class="px-4 pt-1 flex flex-wrap gap-2 justify-center">
+            <span onclick="triggerTawkTo()" class="text-[11px] bg-white/5 border border-white/10 hover:border-amber-500/40 text-slate-300 px-3 py-1.5 rounded-full cursor-pointer transition-colors">🔥 VIP 스웨디시 코스</span>
+            <span onclick="triggerTawkTo()" class="text-[11px] bg-white/5 border border-white/10 hover:border-amber-500/40 text-slate-300 px-3 py-1.5 rounded-full cursor-pointer transition-colors">🌿 아로마 힐링 테라피</span>
+            <span onclick="triggerTawkTo()" class="text-[11px] bg-white/5 border border-white/10 hover:border-amber-500/40 text-slate-300 px-3 py-1.5 rounded-full cursor-pointer transition-colors">🗺️ 위치별 지점 및 위치 조회</span>
+        </div>
+
+        <!-- 核心双通道引流按钮区域 -->
+        <div class="p-4 bg-black/30 border-t border-white/[0.05] flex flex-col gap-2.5 mt-2">
+            
+            <!-- 尊贵黄金 Kakao 预约通道 -->
+            <button onclick="triggerTawkTo()" class="w-full bg-[#FEE500] hover:bg-[#efd700] active:scale-[0.98] text-[#191919] font-bold text-[15px] py-3.5 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-[0_4px_20px_rgba(254,229,0,0.1)]">
+                <span class="w-5 h-5 bg-[#191919] rounded-lg text-[#FEE500] text-[10px] font-black flex items-center justify-center">TALK</span>
+                카카오톡 실시간 코스/예약 문의
+            </button>
+
+            <!-- 翡翠高级 LINE 咨询通道 -->
+            <button onclick="triggerTawkTo()" class="w-full bg-[#06C755] hover:bg-[#05b34c] active:scale-[0.98] text-white font-bold text-[15px] py-3.5 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-[0_4px_20px_rgba(6,199,85,0.1)]">
+                <span class="w-5 h-5 bg-white rounded-full text-[#06C755] text-[11px] font-black flex items-center justify-center">L</span>
+                라인(LINE) 1:1 매니저 프로필 안내
             </button>
         </div>
+
+        <!-- 底部拦截输入框栏 -->
+        <div class="px-4 py-3 bg-[#080d0c] border-t border-white/[0.06] flex items-center gap-3 relative z-20">
+            <div class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-slate-400 cursor-pointer flex items-center justify-between" onclick="triggerTawkTo()">
+                <span>문의하실 내용을 입력하려면 여기를 터치하세요...</span>
+                <span class="text-[10px] text-amber-500/80 font-bold uppercase tracking-wider">Secure</span>
+            </div>
+            <button onclick="triggerTawkTo()" class="text-amber-500 text-xs font-bold px-2 py-1 active:opacity-60">
+                전송
+            </button>
+        </div>
+
     </div>
 
-    <!-- Tawk.to 底层代码 -->
+    <!-- Tawk.to 底层实时通信引擎框架 (100% 修复节点、去空格崩溃版本) -->
     <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    Tawk_API.onChatMaximized = function(){ document.body.classList.add('tawk-open'); };
-    Tawk_API.onChatMinimized = function(){ document.body.classList.remove('tawk-open'); };
+    
+    Tawk_API.onChatMaximized = function(){
+        document.body.classList.add('tawk-open');
+    };
+    Tawk_API.onChatMinimized = function(){
+        document.body.classList.remove('tawk-open');
+    };
 
     (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0]; // 精确锚定数组首项
     s1.async=true;
-    s1.src='https://tawk.to';
+    s1.src='https://tawk.to'; // 已剔除潜在阻断空格
     s1.charset='UTF-8';
     s1.setAttribute('crossorigin','*');
     s0.parentNode.insertBefore(s1,s0);
     })();
     </script>
-    
+
+    <!-- 仿真小姐姐输入交互逻辑 -->
     <script>
-        const chatBox = document.getElementById('custom-chat-box');
+        const msgContainer = document.getElementById('chat-messages-container');
+        msgContainer.scrollTop = msgContainer.scrollHeight;
 
-        // 用户发送消息处理
-        function handleUserSend() {
-            const input = document.getElementById('custom-input');
-            const text = input.value.trim();
-            if(!text) return;
-
-            // 渲染用户发送的气泡
-            const userMsg = document.createElement('div');
-            userMsg.className = 'flex flex-col items-end align-self-end w-full pl-12';
-            userMsg.innerHTML = `<div class="bg-indigo-600 text-white rounded-[20px] rounded-tr-none px-4 py-2.5 text-sm max-w-[85%] ml-auto">${text}</div>`;
-            chatBox.appendChild(userMsg);
-            
-            input.value = '';
-            chatBox.scrollTop = chatBox.scrollHeight;
-
-            // 触发保底：1秒后自动唤醒 Tawk.to，或弹出客服已满提示引导去加 Kakao
-            setTimeout(() => {
-                triggerTawkTo();
-            }, 1000);
-        }
-
+        // 一键无缝拦截最大化唤醒 Tawk.to 客服后台
         function triggerTawkTo() {
             if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
                 window.Tawk_API.maximize();
             } else {
-                // 如果 Tawk 系统彻底不在线或断网，执行最终引流兜底方案
-                alert("현재 실시간 대화창이 포화 상태입니다. 잠시 후 새로고침 후 다시 시도하시거나, 안내에 따라 카카오톡 채널을 추가해 주세요.");
+                alert("안전한 비공개 예약을 위해 보안 채널을 할당 중입니다. 잠시 후 다시 클릭해주세요.");
             }
         }
 
-        // 3秒后模拟客服小姐姐发出指令
+        // 心理学转化延时：3秒后自动清除打字状态，并追加精准转化话术
         setTimeout(() => {
             const typingBox = document.getElementById('typing-box');
             if (typingBox) {
                 typingBox.remove();
+                
                 const replyMsg = document.createElement('div');
-                replyMsg.className = 'flex flex-col items-start max-w-[85%]';
-                replyMsg.innerHTML = `<div class="bg-white/10 text-slate-100 rounded-[20px] rounded-tl-none px-4 py-2.5 text-sm">연결이 원활하지 않을 경우 아래 버튼을 눌러 카카오톡 고객센터로 직접 문의하실 수 있습니다. 🥰</div>`;
-                chatBox.appendChild(replyMsg);
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }
-        }, 3000);
-    </script>
-</body>
-</html>
+                replyMsg.className = 'flex flex-col items-start max-w-[85%] animate-[fadeIn_0.3s_ease-out]';
+                replyMsg.innerHTML = `
